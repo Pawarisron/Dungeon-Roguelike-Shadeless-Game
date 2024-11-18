@@ -15,7 +15,7 @@
 
 `Left Mouse Button` โจมตี
 
-`Objective` เก็บเงินให้มากที่สุด
+`Objective` เก็บเงินให้มากที่สุด หรือ ลงไปในดันเจี้ยนชั้นที่ลึกที่สุด
 
 ## Technologies Used
 - **Game Engine**: Unity
