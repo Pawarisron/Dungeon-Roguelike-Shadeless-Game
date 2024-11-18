@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970c60f021e405646a753320720f468f, type: 3}
+  m_Name: IronBar
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 10
+  <Name>k__BackingField: Iron bar
+  <Description>k__BackingField: It can craft to many useful items
+  price: 0
+  <ItemImage>k__BackingField: {fileID: 6359041982922043458, guid: fd0d7f3febff5e849bf2888c81b9bfab, type: 3}
+  <DefaultParametersList>k__BackingField: []

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394410f4c03965c4b936670993284ceb, type: 3}
+  m_Name: Bread
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 99
+  <Name>k__BackingField: Bread
+  <Description>k__BackingField: Bread...bread....bread
+  price: 10
+  <ItemImage>k__BackingField: {fileID: 412731869189115067, guid: 45f3b4ff9ce291145904534aa798fc0c, type: 3}
+  <DefaultParametersList>k__BackingField: []
+  modiflierDatas:
+  - statModiflier: {fileID: 11400000, guid: fcc27f5088ac8574aac98ae4f1cf560f, type: 2}
+    value: 10
+  <actionSFX>k__BackingField: {fileID: 0}

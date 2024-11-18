@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ebd9d3adaf77d47952692ca3ca3895, type: 3}
+  m_Name: Tombe1
+  m_EditorClassIdentifier: 
+  PropPrefab: {fileID: 2887500343737096280, guid: 5252dd5bc9b40934e98f06cba3310c9e, type: 3}
+  PropSize: {x: 1, y: 1}
+  Corner: 0
+  NearWallUP: 1
+  NearWallDown: 0
+  NearWallRight: 0
+  NearWallLeft: 0
+  Inner: 0
+  PlacementQuantityMin: 1
+  PlacementQuantityMax: 2
+  SpawnProbability: 0.5
+  PlaceAsGroup: 0
+  GroupMinCount: 1
+  GroupMaxCount: 1

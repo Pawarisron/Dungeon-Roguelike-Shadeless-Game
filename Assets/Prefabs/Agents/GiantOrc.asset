@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d0b8784a9e508429758840c4a2e1b0, type: 3}
+  m_Name: GiantOrc
+  m_EditorClassIdentifier: 
+  EnemyPrefab: {fileID: 5813762728333709792, guid: e6d4da867c867644299d46bd1a554ba0, type: 3}
+  MinSpawnAmount: 2
+  MaxSpawnAmount: 3
+  SpawnProbability: 0.2
+  Size: {x: 3, y: 2}
+  PivotOffset: {x: 1.2, y: 0}

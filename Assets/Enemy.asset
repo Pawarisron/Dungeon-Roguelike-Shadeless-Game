@@ -1,0 +1,341 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7496099606584942297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: Enemy Blackboard Editor
+  m_EditorClassIdentifier: 
+  AssetID:
+    m_Value0: 3817211580246356928
+    m_Value1: 17901407488484331179
+  m_Variables:
+  - rid: 8614916696566399245
+  - rid: 8614916696566399306
+  m_VersionTimestamp: 638663489978639988
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: 6501693911089303014}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8614916696566399245
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 8614916696566399306
+      type: {class: 'TypedVariableModel`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 3236251546744091123
+          m_Value1: 17232201834339629369
+        Name: Patrols
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+--- !u!114 &-1479644833608734907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db920e62f70f420bb33c771449926fa4, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  Graphs:
+  - rid: 8614917016765333624
+  RootGraph:
+    rid: 8614917016765333624
+  m_DebugInfo: {fileID: 7184161330520940874}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8614917016765333624
+      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        AuthoringAssetID:
+          m_Value0: 3817211580246356928
+          m_Value1: 17901407488484331179
+        m_DebugInfo: {fileID: 7184161330520940874}
+        Root:
+          rid: 8614917016765333625
+        BlackboardReference:
+          rid: 8614917016765333626
+        BlackboardGroupReferences: []
+        m_VersionTimestamp: 638663489978639988
+    - rid: 8614917016765333625
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 6898022709526723049
+          m_Value1: 8848750002351527224
+        Graph:
+          rid: 8614917016765333624
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 8614917016765333627
+        Repeat: 1
+    - rid: 8614917016765333626
+      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Blackboard:
+          rid: 8614917016765333628
+        m_Source: {fileID: 6501693911089303014}
+    - rid: 8614917016765333627
+      type: {class: DetectorAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 12169882891090525422
+          m_Value1: 1539120643386161350
+        Graph:
+          rid: 8614917016765333624
+        m_Parent:
+          rid: 8614917016765333625
+        DetectorTarget:
+          rid: 8614917016765333629
+    - rid: 8614917016765333628
+      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Variables:
+        - rid: 8614917016765333630
+        - rid: 8614917016765333631
+    - rid: 8614917016765333629
+      type: {class: 'BlackboardVariable`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 8614917016765333630
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 8614917016765333631
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3236251546744091123
+          m_Value1: 17232201834339629369
+        Name: Patrols
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad8f2220607dac4db5082ff333fafb8, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  Blackboard: {fileID: -7496099606584942297}
+  m_Description: 
+  m_Nodes:
+  - rid: 8614916696566399243
+  - rid: 8614916696566399809
+  m_VersionTimestamp: 638663489978639988
+  m_DebugInfo: {fileID: 7184161330520940874}
+  AssetID:
+    m_Value0: 3817211580246356928
+    m_Value1: 17901407488484331179
+  Story:
+    Story: 
+    StoryVariableNames: []
+    Variables: []
+  m_NodeModelsInfo:
+  - Name: On Start
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 3335272451348827663
+      m_Value1: 11549843281177505721
+    Variables: []
+    NamedChildren: []
+  - Name: Detector
+    Story: 'Check [DetectorTarget]'
+    RuntimeTypeID:
+      m_Value0: 12865957046179247609
+      m_Value1: 16255097913756920209
+    Variables:
+    - Name: DetectorTarget
+      Type:
+        m_SerializableType: TargetDetector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  m_Blackboards: []
+  m_CommandBuffer:
+    m_Commands: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8614916696566399243
+      type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 10.285247, y: -118.61285}
+        ID:
+          m_Value0: 6898022709526723049
+          m_Value1: 8848750002351527224
+        Parents: []
+        PortModels:
+        - rid: 8614916696566399244
+        NodeType:
+          m_SerializableType: Unity.Behavior.Start, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3335272451348827663
+          m_Value1: 11549843281177505721
+        m_FieldValues: []
+        Repeat: 1
+    - rid: 8614916696566399244
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 8614916696566399243
+        m_Connections:
+        - rid: 8614916696566399810
+    - rid: 8614916696566399809
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 11.735247, y: -7.7596655}
+        ID:
+          m_Value0: 12169882891090525422
+          m_Value1: 1539120643386161350
+        Parents: []
+        PortModels:
+        - rid: 8614916696566399810
+        - rid: 8614916696566399811
+        NodeType:
+          m_SerializableType: DetectorAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 12865957046179247609
+          m_Value1: 16255097913756920209
+        m_FieldValues:
+        - rid: 8614916696566399901
+    - rid: 8614916696566399810
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 8614916696566399809
+        m_Connections:
+        - rid: 8614916696566399244
+    - rid: 8614916696566399811
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 8614916696566399809
+        m_Connections: []
+    - rid: 8614916696566399901
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: DetectorTarget
+        Type:
+          m_SerializableType: TargetDetector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 8614916696566399902
+        LinkedVariable:
+          rid: -2
+    - rid: 8614916696566399902
+      type: {class: 'BlackboardVariable`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+--- !u!114 &6501693911089303014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: Enemy Blackboard Editor
+  m_EditorClassIdentifier: 
+  VersionTimestamp: 638663489978639988
+  AssetID:
+    m_Value0: 3817211580246356928
+    m_Value1: 17901407488484331179
+  m_Blackboard:
+    m_Variables:
+    - rid: 8614917016765333605
+    - rid: 8614917016765333606
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 8614917016765333605
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 8614917016765333606
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3236251546744091123
+          m_Value1: 17232201834339629369
+        Name: Patrols
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+--- !u!114 &7184161330520940874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b27bb6d9a2c8d540a10dff10acc543e, type: 3}
+  m_Name: Enemy Debug Info
+  m_EditorClassIdentifier: 
+  m_CodeBreakPointsList: []

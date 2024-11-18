@@ -1,0 +1,835 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6079334438162572854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b27bb6d9a2c8d540a10dff10acc543e, type: 3}
+  m_Name: NPC-SolliderBehaviour Debug Info
+  m_EditorClassIdentifier: 
+  m_CodeBreakPointsList: []
+--- !u!114 &-4442034153383861403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db920e62f70f420bb33c771449926fa4, type: 3}
+  m_Name: NPC-SolliderBehaviour
+  m_EditorClassIdentifier: 
+  Graphs:
+  - rid: 3428136626463703941
+  RootGraph:
+    rid: 3428136626463703941
+  m_DebugInfo: {fileID: -6079334438162572854}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3428136626463703941
+      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        AuthoringAssetID:
+          m_Value0: 2657490809798751540
+          m_Value1: 5906202003398017803
+        m_DebugInfo: {fileID: 0}
+        Root:
+          rid: 3428136626463703942
+        BlackboardReference:
+          rid: 3428136626463703943
+        BlackboardGroupReferences: []
+        m_VersionTimestamp: 638663703360842375
+    - rid: 3428136626463703942
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 632880202907093725
+          m_Value1: 7388651121232927197
+        Graph:
+          rid: 3428136626463703941
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 3428136626463703944
+        Repeat: 0
+    - rid: 3428136626463703943
+      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Blackboard:
+          rid: 3428136626463703945
+        m_Source: {fileID: 6130454893363086063}
+    - rid: 3428136626463703944
+      type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 11403732746586219327
+          m_Value1: 12956904199396942810
+        Graph:
+          rid: 3428136626463703941
+        m_Parent:
+          rid: 3428136626463703942
+        m_Children:
+        - rid: 3428136626463703946
+        - rid: 3428136626463703947
+    - rid: 3428136626463703945
+      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Variables:
+        - rid: 3428136626463703948
+        - rid: 3428136626463703949
+        - rid: 3428136626463703950
+        - rid: 3428136626463703951
+        - rid: 3428136626463703952
+        - rid: 3428136626463703953
+        - rid: 3428136626463703954
+        - rid: 3428136626463703955
+    - rid: 3428136626463703946
+      type: {class: RepeaterModifier, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 4942573835156103981
+          m_Value1: 10461732032597066416
+        Graph:
+          rid: 3428136626463703941
+        m_Parent:
+          rid: 3428136626463703944
+        m_Child:
+          rid: 3428136626463703956
+    - rid: 3428136626463703947
+      type: {class: RepeaterModifier, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 11783380819902087983
+          m_Value1: 17682529462468183792
+        Graph:
+          rid: 3428136626463703941
+        m_Parent:
+          rid: 3428136626463703944
+        m_Child:
+          rid: -2
+    - rid: 3428136626463703948
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703949
+      type: {class: 'BlackboardVariable`1[[AI_Data, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15200475405417816890
+          m_Value1: 16348799532051160852
+        Name: Data
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703950
+      type: {class: 'BlackboardVariable`1[[ContextSolver, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7225830125449946077
+          m_Value1: 8242446528798424603
+        Name: Solver
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703951
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector2, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7092999010293879208
+          m_Value1: 18285295487322544579
+        Name: Movement
+        m_Value: {x: 0, y: 0}
+    - rid: 3428136626463703952
+      type: {class: 'BlackboardVariable`1[[ObsticleDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15912710272850084655
+          m_Value1: 7152794667371461957
+        Name: ObsticleDetector
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703953
+      type: {class: 'BlackboardVariable`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17516128430333891756
+          m_Value1: 13885151825317116973
+        Name: TargetDetector
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703954
+      type: {class: 'BlackboardVariable`1[[SeekBehaviour, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10100828947473799447
+          m_Value1: 10492612307541747033
+        Name: SeekBeheviour
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703955
+      type: {class: 'BlackboardVariable`1[[ObstacleAvoidanceBehaviour, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14348985084031902415
+          m_Value1: 15111930956678909814
+        Name: Avoidance
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703956
+      type: {class: PerformDetectionAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 5985544063048216088
+          m_Value1: 5713622762346775758
+        Graph:
+          rid: 3428136626463703941
+        m_Parent:
+          rid: 3428136626463703946
+        ObsticleDetector:
+          rid: 3428136626463703952
+        TargetDetector:
+          rid: 3428136626463703953
+        SeekBehaviour:
+          rid: 3428136626463703954
+        Avoidance:
+          rid: 3428136626463703955
+        Data:
+          rid: 3428136626463703949
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad8f2220607dac4db5082ff333fafb8, type: 3}
+  m_Name: NPC-SolliderBehaviour
+  m_EditorClassIdentifier: 
+  Blackboard: {fileID: 5307930905048304404}
+  m_Description: 
+  m_Nodes:
+  - rid: 3428136624322511228
+  - rid: 3428136624322511486
+  - rid: 3428136624322511489
+  - rid: 3428136624322511645
+  - rid: 3428136626463703198
+  m_VersionTimestamp: 638663703360842375
+  m_DebugInfo: {fileID: -6079334438162572854}
+  AssetID:
+    m_Value0: 2657490809798751540
+    m_Value1: 5906202003398017803
+  Story:
+    Story: 
+    StoryVariableNames: []
+    Variables: []
+  m_NodeModelsInfo:
+  - Name: On Start
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 3335272451348827663
+      m_Value1: 11549843281177505721
+    Variables: []
+    NamedChildren: []
+  - Name: Repeat
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 3696095273264312494
+      m_Value1: 14191201703811421854
+    Variables: []
+    NamedChildren: []
+  - Name: Run In Parallel
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 6216542881172158703
+      m_Value1: 2191282456596108218
+    Variables: []
+    NamedChildren: []
+  - Name: PerformDetection
+    Story: Use [ObsticleDetector] [TargetDetector] [SeekBehaviour] [Avoidance] and
+      [Data] to crete graph
+    RuntimeTypeID:
+      m_Value0: 343793365618871030
+      m_Value1: 140822108512335086
+    Variables:
+    - Name: ObsticleDetector
+      Type:
+        m_SerializableType: ObsticleDetector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: TargetDetector
+      Type:
+        m_SerializableType: TargetDetector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: SeekBehaviour
+      Type:
+        m_SerializableType: SeekBehaviour, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: Avoidance
+      Type:
+        m_SerializableType: ObstacleAvoidanceBehaviour, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Data
+      Type:
+        m_SerializableType: AI_Data, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  m_Blackboards: []
+  m_CommandBuffer:
+    m_Commands: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3428136624322511228
+      type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 0, y: 0}
+        ID:
+          m_Value0: 632880202907093725
+          m_Value1: 7388651121232927197
+        Parents: []
+        PortModels:
+        - rid: 3428136624322511229
+        NodeType:
+          m_SerializableType: Unity.Behavior.Start, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3335272451348827663
+          m_Value1: 11549843281177505721
+        m_FieldValues: []
+        Repeat: 0
+    - rid: 3428136624322511229
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511228
+        m_Connections:
+        - rid: 3428136624322511490
+    - rid: 3428136624322511486
+      type: {class: RepeatNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -126.4, y: 175.60004}
+        ID:
+          m_Value0: 4942573835156103981
+          m_Value1: 10461732032597066416
+        Parents: []
+        PortModels:
+        - rid: 3428136624322511487
+        - rid: 3428136624322511488
+        NodeType:
+          m_SerializableType: Unity.Behavior.RepeaterModifier, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3696095273264312494
+          m_Value1: 14191201703811421854
+        m_FieldValues: []
+        <ConditionModels>k__BackingField: []
+        <RequiresAllConditionsTrue>k__BackingField: 0
+        <ShouldTruncateNodeUI>k__BackingField: 0
+        m_RepeatMode: 0
+    - rid: 3428136624322511487
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511486
+        m_Connections:
+        - rid: 3428136624322511491
+    - rid: 3428136624322511488
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511486
+        m_Connections:
+        - rid: 3428136624322511646
+    - rid: 3428136624322511489
+      type: {class: RunInParallelNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -0.662934, y: 88.85705}
+        ID:
+          m_Value0: 11403732746586219327
+          m_Value1: 12956904199396942810
+        Parents: []
+        PortModels:
+        - rid: 3428136624322511490
+        - rid: 3428136624322511491
+        NodeType:
+          m_SerializableType: Unity.Behavior.ParallelAllComposite, Unity.Behavior,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 6216542881172158703
+          m_Value1: 2191282456596108218
+        m_FieldValues: []
+        m_Mode: 0
+    - rid: 3428136624322511490
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511489
+        m_Connections:
+        - rid: 3428136624322511229
+    - rid: 3428136624322511491
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511489
+        m_Connections:
+        - rid: 3428136624322511487
+        - rid: 3428136626463703199
+    - rid: 3428136624322511645
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -326.4315, y: 284.37177}
+        ID:
+          m_Value0: 5985544063048216088
+          m_Value1: 5713622762346775758
+        Parents: []
+        PortModels:
+        - rid: 3428136624322511646
+        - rid: 3428136624322511647
+        NodeType:
+          m_SerializableType: PerformDetectionAction, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 343793365618871030
+          m_Value1: 140822108512335086
+        m_FieldValues:
+        - rid: 3428136624322511648
+        - rid: 3428136624322511649
+        - rid: 3428136624322511650
+        - rid: 3428136624322511651
+        - rid: 3428136624322511652
+    - rid: 3428136624322511646
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511645
+        m_Connections:
+        - rid: 3428136624322511488
+    - rid: 3428136624322511647
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136624322511645
+        m_Connections: []
+    - rid: 3428136624322511648
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: ObsticleDetector
+        Type:
+          m_SerializableType: ObsticleDetector, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3428136624322511653
+        LinkedVariable:
+          rid: 3428136626463703895
+    - rid: 3428136624322511649
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: TargetDetector
+        Type:
+          m_SerializableType: TargetDetector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 3428136624322511654
+        LinkedVariable:
+          rid: 3428136626463703896
+    - rid: 3428136624322511650
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: SeekBehaviour
+        Type:
+          m_SerializableType: SeekBehaviour, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 3428136624322511655
+        LinkedVariable:
+          rid: 3428136626463703897
+    - rid: 3428136624322511651
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Avoidance
+        Type:
+          m_SerializableType: ObstacleAvoidanceBehaviour, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3428136624322511656
+        LinkedVariable:
+          rid: 3428136626463703898
+    - rid: 3428136624322511652
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Data
+        Type:
+          m_SerializableType: AI_Data, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 3428136624322511657
+        LinkedVariable:
+          rid: 3428136626463703899
+    - rid: 3428136624322511653
+      type: {class: 'BlackboardVariable`1[[ObsticleDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511654
+      type: {class: 'BlackboardVariable`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511655
+      type: {class: 'BlackboardVariable`1[[SeekBehaviour, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511656
+      type: {class: 'BlackboardVariable`1[[ObstacleAvoidanceBehaviour, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511657
+      type: {class: 'BlackboardVariable`1[[AI_Data, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703198
+      type: {class: RepeatNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 115.239845, y: 177.44966}
+        ID:
+          m_Value0: 11783380819902087983
+          m_Value1: 17682529462468183792
+        Parents: []
+        PortModels:
+        - rid: 3428136626463703199
+        - rid: 3428136626463703200
+        NodeType:
+          m_SerializableType: Unity.Behavior.RepeaterModifier, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3696095273264312494
+          m_Value1: 14191201703811421854
+        m_FieldValues: []
+        <ConditionModels>k__BackingField: []
+        <RequiresAllConditionsTrue>k__BackingField: 0
+        <ShouldTruncateNodeUI>k__BackingField: 0
+        m_RepeatMode: 0
+    - rid: 3428136626463703199
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136626463703198
+        m_Connections:
+        - rid: 3428136624322511491
+    - rid: 3428136626463703200
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3428136626463703198
+        m_Connections: []
+    - rid: 3428136626463703895
+      type: {class: 'TypedVariableModel`1[[ObsticleDetector, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15912710272850084655
+          m_Value1: 7152794667371461957
+        Name: ObsticleDetector
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703896
+      type: {class: 'TypedVariableModel`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 17516128430333891756
+          m_Value1: 13885151825317116973
+        Name: TargetDetector
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703897
+      type: {class: 'TypedVariableModel`1[[SeekBehaviour, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 10100828947473799447
+          m_Value1: 10492612307541747033
+        Name: SeekBeheviour
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703898
+      type: {class: 'TypedVariableModel`1[[ObstacleAvoidanceBehaviour, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14348985084031902415
+          m_Value1: 15111930956678909814
+        Name: Avoidance
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703899
+      type: {class: 'TypedVariableModel`1[[AI_Data, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15200475405417816890
+          m_Value1: 16348799532051160852
+        Name: Data
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+--- !u!114 &5307930905048304404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: NPC-SolliderBehaviour Blackboard Editor
+  m_EditorClassIdentifier: 
+  AssetID:
+    m_Value0: 2657490809798751540
+    m_Value1: 5906202003398017803
+  m_Variables:
+  - rid: 3428136624322511234
+  - rid: 3428136624322511247
+  - rid: 3428136624322511332
+  - rid: 3428136624322511343
+  - rid: 3428136624322511436
+  - rid: 3428136624322511437
+  - rid: 3428136624322511464
+  - rid: 3428136624322511465
+  m_VersionTimestamp: 638663703361223613
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: 6130454893363086063}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3428136624322511234
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511247
+      type: {class: 'TypedVariableModel`1[[AI_Data, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15200475405417816890
+          m_Value1: 16348799532051160852
+        Name: Data
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511332
+      type: {class: 'TypedVariableModel`1[[ContextSolver, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 7225830125449946077
+          m_Value1: 8242446528798424603
+        Name: Solver
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511343
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector2, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 7092999010293879208
+          m_Value1: 18285295487322544579
+        Name: Movement
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0, y: 0}
+    - rid: 3428136624322511436
+      type: {class: 'TypedVariableModel`1[[ObsticleDetector, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15912710272850084655
+          m_Value1: 7152794667371461957
+        Name: ObsticleDetector
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511437
+      type: {class: 'TypedVariableModel`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 17516128430333891756
+          m_Value1: 13885151825317116973
+        Name: TargetDetector
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511464
+      type: {class: 'TypedVariableModel`1[[SeekBehaviour, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 10100828947473799447
+          m_Value1: 10492612307541747033
+        Name: SeekBeheviour
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3428136624322511465
+      type: {class: 'TypedVariableModel`1[[ObstacleAvoidanceBehaviour, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14348985084031902415
+          m_Value1: 15111930956678909814
+        Name: Avoidance
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+--- !u!114 &6130454893363086063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: NPC-SolliderBehaviour Blackboard Editor
+  m_EditorClassIdentifier: 
+  VersionTimestamp: 638663703361223613
+  AssetID:
+    m_Value0: 2657490809798751540
+    m_Value1: 5906202003398017803
+  m_Blackboard:
+    m_Variables:
+    - rid: 3428136626463703917
+    - rid: 3428136626463703918
+    - rid: 3428136626463703919
+    - rid: 3428136626463703920
+    - rid: 3428136626463703921
+    - rid: 3428136626463703922
+    - rid: 3428136626463703923
+    - rid: 3428136626463703924
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3428136626463703917
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703918
+      type: {class: 'BlackboardVariable`1[[AI_Data, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15200475405417816890
+          m_Value1: 16348799532051160852
+        Name: Data
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703919
+      type: {class: 'BlackboardVariable`1[[ContextSolver, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7225830125449946077
+          m_Value1: 8242446528798424603
+        Name: Solver
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703920
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector2, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7092999010293879208
+          m_Value1: 18285295487322544579
+        Name: Movement
+        m_Value: {x: 0, y: 0}
+    - rid: 3428136626463703921
+      type: {class: 'BlackboardVariable`1[[ObsticleDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15912710272850084655
+          m_Value1: 7152794667371461957
+        Name: ObsticleDetector
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703922
+      type: {class: 'BlackboardVariable`1[[TargetDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17516128430333891756
+          m_Value1: 13885151825317116973
+        Name: TargetDetector
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703923
+      type: {class: 'BlackboardVariable`1[[SeekBehaviour, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10100828947473799447
+          m_Value1: 10492612307541747033
+        Name: SeekBeheviour
+        m_Value: {fileID: 0}
+    - rid: 3428136626463703924
+      type: {class: 'BlackboardVariable`1[[ObstacleAvoidanceBehaviour, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14348985084031902415
+          m_Value1: 15111930956678909814
+        Name: Avoidance
+        m_Value: {fileID: 0}

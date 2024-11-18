@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970c60f021e405646a753320720f468f, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Log
+  <Description>k__BackingField: Very large log
+  price: 30
+  <ItemImage>k__BackingField: {fileID: 392699826069465932, guid: 87a82c9e8dbd1fd47b3f28a4a3bfe820, type: 3}
+  <DefaultParametersList>k__BackingField: []

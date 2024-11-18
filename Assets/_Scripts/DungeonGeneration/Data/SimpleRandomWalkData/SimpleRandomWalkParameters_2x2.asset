@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b506f0f5b76d54b926b067bd20b38e, type: 3}
+  m_Name: SimpleRandomWalkParameters_2x2
+  m_EditorClassIdentifier: 
+  iterations: 20
+  walkLength: 20
+  gridX: 2
+  gridY: 2
+  offsetX: 1
+  offsetY: 1
+  wallHeight: 4
+  wallEdgeWidth: 1
+  startRandomlyEachIteration: 0

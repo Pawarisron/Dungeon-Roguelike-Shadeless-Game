@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Obsticle
+  - Player
+  - Floor
+  - Enemy
+  - Corpse
+  - Table
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Floor
+    uniqueID: 116574061
+    locked: 0
+  - name: Background
+    uniqueID: 4000568941
+    locked: 0
+  - name: Traps
+    uniqueID: 2436433295
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 278164585
+    locked: 0
+  - name: Foreground
+    uniqueID: 3385082167
+    locked: 0
+  m_RenderingLayers:
+  - Default

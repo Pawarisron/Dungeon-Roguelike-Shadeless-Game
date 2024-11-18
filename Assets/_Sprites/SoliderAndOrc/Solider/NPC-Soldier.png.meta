@@ -1,0 +1,1287 @@
+fileFormatVersion: 2
+guid: fae25a9b617cd9e44af5e9f873aad3d8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7469806826540079034
+    second: Soldier-NPC_0
+  - first:
+      213: -158371154348163396
+    second: Soldier-NPC_1
+  - first:
+      213: -3811310955444896360
+    second: Soldier-NPC_2
+  - first:
+      213: 1678802907551694166
+    second: Soldier-NPC_3
+  - first:
+      213: 7552951561074068044
+    second: Soldier-NPC_4
+  - first:
+      213: 9055299070795593787
+    second: Soldier-NPC_5
+  - first:
+      213: -224581714962810534
+    second: Soldier-NPC_6
+  - first:
+      213: -7878985133711103218
+    second: Soldier-NPC_7
+  - first:
+      213: 7605185102571662855
+    second: Soldier-NPC_8
+  - first:
+      213: 7070177015139899421
+    second: Soldier-NPC_9
+  - first:
+      213: -920175194237265076
+    second: Soldier-NPC_10
+  - first:
+      213: -7108864731332071495
+    second: Soldier-NPC_11
+  - first:
+      213: 7959134376670444681
+    second: Soldier-NPC_12
+  - first:
+      213: 9135024224763110978
+    second: Soldier-NPC_13
+  - first:
+      213: -8233513434045122196
+    second: Soldier-NPC_14
+  - first:
+      213: 3921322646100694639
+    second: Soldier-NPC_15
+  - first:
+      213: 6122297386015998204
+    second: Soldier-NPC_16
+  - first:
+      213: 4745910942974770430
+    second: Soldier-NPC_17
+  - first:
+      213: -7524946564543364073
+    second: Soldier-NPC_18
+  - first:
+      213: 6409208688156544018
+    second: Soldier-NPC_19
+  - first:
+      213: 7252707484506894881
+    second: Soldier-NPC_20
+  - first:
+      213: -6365181535313399385
+    second: Soldier-NPC_21
+  - first:
+      213: 4115730518166273390
+    second: Soldier-NPC_22
+  - first:
+      213: -319905473601505777
+    second: Soldier-NPC_23
+  - first:
+      213: 6780165442402294833
+    second: Soldier-NPC_24
+  - first:
+      213: -8669516278705936714
+    second: Soldier-NPC_25
+  - first:
+      213: -7809771660835495080
+    second: Soldier-NPC_26
+  - first:
+      213: 7057405903651931543
+    second: Soldier-NPC_27
+  - first:
+      213: -963824042316289562
+    second: Soldier-NPC_28
+  - first:
+      213: 6129846125511330445
+    second: Soldier-NPC_29
+  - first:
+      213: -4723810258559124520
+    second: Soldier-NPC_30
+  - first:
+      213: -2459963854620777211
+    second: Soldier-NPC_31
+  - first:
+      213: -3961547444323542406
+    second: Soldier-NPC_32
+  - first:
+      213: 4831452803438051930
+    second: Soldier-NPC_33
+  - first:
+      213: 1459483524770793647
+    second: Soldier-NPC_34
+  - first:
+      213: -5038002275055716462
+    second: Soldier-NPC_35
+  - first:
+      213: -2004171279003011935
+    second: Soldier-NPC_36
+  - first:
+      213: 9125924853098164618
+    second: Soldier-NPC_37
+  - first:
+      213: -7609737071578075271
+    second: Soldier-NPC_38
+  - first:
+      213: -6603171944949906357
+    second: Soldier-NPC_39
+  - first:
+      213: 7585756212393695811
+    second: Soldier-NPC_40
+  - first:
+      213: -6979270230912232463
+    second: Soldier-NPC_41
+  - first:
+      213: -3309042730818158144
+    second: Soldier-NPC_42
+  - first:
+      213: 648229836816574425
+    second: Soldier-NPC_43
+  - first:
+      213: -8194810278088601225
+    second: Soldier-NPC_44
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Soldier-NPC_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 639
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6486a4b944ae55890800000000000000
+      internalID: -7469806826540079034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_1
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 639
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbeb862364a5dcdf0800000000000000
+      internalID: -158371154348163396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 639
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89df62411e08b1bc0800000000000000
+      internalID: -3811310955444896360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_3
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 639
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65df288895e4c4710800000000000000
+      internalID: 1678802907551694166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_4
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 639
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4a4d837d6971d860800000000000000
+      internalID: 7552951561074068044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_5
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 639
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3832b12782eaad70800000000000000
+      internalID: 9055299070795593787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_6
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 539
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59f790ce1022ecf0800000000000000
+      internalID: -224581714962810534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 539
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0be09af3c838a290800000000000000
+      internalID: -7878985133711103218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_8
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 539
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70e60e98e8b0b8960800000000000000
+      internalID: 7605185102571662855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_9
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 539
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d189b8e29805e1260800000000000000
+      internalID: 7070177015139899421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_10
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 539
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4b9c504981ea33f0800000000000000
+      internalID: -920175194237265076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_11
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 539
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf26a4f03d385d90800000000000000
+      internalID: -7108864731332071495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_12
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 539
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98cba09db86847e60800000000000000
+      internalID: 7959134376670444681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_13
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 539
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 246e79b022026ce70800000000000000
+      internalID: 9135024224763110978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_14
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 439
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c69755e972facbd80800000000000000
+      internalID: -8233513434045122196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_15
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 439
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f66d68aab265b6630800000000000000
+      internalID: 3921322646100694639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 439
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf049c60905c6f450800000000000000
+      internalID: 6122297386015998204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_17
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 439
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc76a39bdcdcd140800000000000000
+      internalID: 4745910942974770430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_18
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 439
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 714c89ae7f4029790800000000000000
+      internalID: -7524946564543364073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_19
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 439
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c0bec285512f850800000000000000
+      internalID: 6409208688156544018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_20
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 339
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 122b9d9d70bc6a460800000000000000
+      internalID: 7252707484506894881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_21
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 346
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a1f4c82e155aa7a0800000000000000
+      internalID: -6365181535313399385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_22
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 347
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6df886a9130e1930800000000000000
+      internalID: 4115730518166273390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_23
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 339
+        width: 30
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f06774caaa77f8bf0800000000000000
+      internalID: -319905473601505777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_24
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 339
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c94c80c8cf71e50800000000000000
+      internalID: 6780165442402294833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_25
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 339
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b62449a0e0bfa780800000000000000
+      internalID: -8669516278705936714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_26
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 339
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 853ecfa6d0e1e9390800000000000000
+      internalID: -7809771660835495080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_27
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 339
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7950be21741f0f160800000000000000
+      internalID: 7057405903651931543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_28
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 239
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e9a1cbd32fcf92f0800000000000000
+      internalID: -963824042316289562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_29
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 239
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a48e6e296911550800000000000000
+      internalID: 6129846125511330445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_30
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 239
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dbbc300997a17eb0800000000000000
+      internalID: -4723810258559124520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_31
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 239
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 505270d58e37cddd0800000000000000
+      internalID: -2459963854620777211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_32
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 239
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7a1d3ca691c509c0800000000000000
+      internalID: -3961547444323542406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_33
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 239
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a528df10ab4cc0340800000000000000
+      internalID: 4831452803438051930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_34
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 239
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa88f797880214410800000000000000
+      internalID: 1459483524770793647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_35
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 239
+        width: 38
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 297b1b19f9b651ab0800000000000000
+      internalID: -5038002275055716462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_36
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 239
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a43cfd17d0cf24e0800000000000000
+      internalID: -2004171279003011935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_37
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 139
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8133db7d4cc5ae70800000000000000
+      internalID: 9125924853098164618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_38
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 139
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97fa7769378c46690800000000000000
+      internalID: -7609737071578075271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_39
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 139
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b448f66e912dc54a0800000000000000
+      internalID: -6603171944949906357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_40
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 139
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34a50788515064960800000000000000
+      internalID: 7585756212393695811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_41
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 39
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f39407e3b6a42f90800000000000000
+      internalID: -6979270230912232463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_42
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 39
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c1cefa1b2be312d0800000000000000
+      internalID: -3309042730818158144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_43
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 39
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d7e2442a99fef800800000000000000
+      internalID: 648229836816574425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soldier-NPC_44
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 39
+        width: 24
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7711fc4587f264e80800000000000000
+      internalID: -8194810278088601225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Soldier-NPC_0: -7469806826540079034
+      Soldier-NPC_1: -158371154348163396
+      Soldier-NPC_10: -920175194237265076
+      Soldier-NPC_11: -7108864731332071495
+      Soldier-NPC_12: 7959134376670444681
+      Soldier-NPC_13: 9135024224763110978
+      Soldier-NPC_14: -8233513434045122196
+      Soldier-NPC_15: 3921322646100694639
+      Soldier-NPC_16: 6122297386015998204
+      Soldier-NPC_17: 4745910942974770430
+      Soldier-NPC_18: -7524946564543364073
+      Soldier-NPC_19: 6409208688156544018
+      Soldier-NPC_2: -3811310955444896360
+      Soldier-NPC_20: 7252707484506894881
+      Soldier-NPC_21: -6365181535313399385
+      Soldier-NPC_22: 4115730518166273390
+      Soldier-NPC_23: -319905473601505777
+      Soldier-NPC_24: 6780165442402294833
+      Soldier-NPC_25: -8669516278705936714
+      Soldier-NPC_26: -7809771660835495080
+      Soldier-NPC_27: 7057405903651931543
+      Soldier-NPC_28: -963824042316289562
+      Soldier-NPC_29: 6129846125511330445
+      Soldier-NPC_3: 1678802907551694166
+      Soldier-NPC_30: -4723810258559124520
+      Soldier-NPC_31: -2459963854620777211
+      Soldier-NPC_32: -3961547444323542406
+      Soldier-NPC_33: 4831452803438051930
+      Soldier-NPC_34: 1459483524770793647
+      Soldier-NPC_35: -5038002275055716462
+      Soldier-NPC_36: -2004171279003011935
+      Soldier-NPC_37: 9125924853098164618
+      Soldier-NPC_38: -7609737071578075271
+      Soldier-NPC_39: -6603171944949906357
+      Soldier-NPC_4: 7552951561074068044
+      Soldier-NPC_40: 7585756212393695811
+      Soldier-NPC_41: -6979270230912232463
+      Soldier-NPC_42: -3309042730818158144
+      Soldier-NPC_43: 648229836816574425
+      Soldier-NPC_44: -8194810278088601225
+      Soldier-NPC_5: 9055299070795593787
+      Soldier-NPC_6: -224581714962810534
+      Soldier-NPC_7: -7878985133711103218
+      Soldier-NPC_8: 7605185102571662855
+      Soldier-NPC_9: 7070177015139899421
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
