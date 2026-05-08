@@ -1,4 +1,28 @@
-# Sekiro-Style Combat — Phase 1 MVP
+# Sekiro-Style Combat
+
+## ⚡ ทางลัด — Auto-Wire ครั้งเดียว
+
+ถ้าอยากข้าม manual setup ทั้งหมด:
+
+1. เปิดโปรเจกต์ใน **Unity 6000.0.25f1**
+2. เมนู: **Tools → Sekiro Combat → Auto-Wire Everything**
+3. รอ ~3 วินาที — Editor script จะ:
+   - เพิ่ม component ที่ขาดบน Player.prefab (PostureManager, ParryController, MikiriDetector, DodgeController, ComboCounter, MikiriArrowIndicator, AudioSource, CombatSfx, PlayerActionTracker, PlayerPatternProfile)
+   - เพิ่ม PostureManager + DeathblowMarker + AttackTelegraph บน enemy prefabs ทุกตัว
+   - เพิ่ม UtilityBrain + BossPhaseManager บน Boss prefab
+   - สร้าง 4 AttackData SO assets (Slash / Sweep / Thrust / Crash) ใน `Assets/Data/Combat/`
+   - Wire 11 UnityEvents ที่ commonly needed
+4. **ขั้นตอน manual ที่เหลือ** (ไม่ auto ได้เพราะเป็น Input System UI):
+   - เปิด `Assets/_Scripts/Entity/Player/New Controls.inputactions`
+   - Add Action ชื่อ `Parry` (Button) + binding `<Mouse>/rightButton`
+   - Drag InputActionReference → Player.prefab → PlayerInput.parry
+5. Build & Play
+
+ขั้นตอน manual ทั้งหมดด้านล่างยังคงใช้ได้ถ้าอยากปรับเองทีละ component
+
+---
+
+# Phase 1 MVP
 
 ระบบ posture + parry + deathblow สำหรับ 2D top-down. โค้ดเสร็จแล้ว — เหลือ wiring ใน Unity Editor
 
