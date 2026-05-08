@@ -87,6 +87,7 @@ public static class SekiroAutoWire
             var audio = instance.GetComponent<AudioSource>();
             if (audio == null) { audio = instance.AddComponent<AudioSource>(); audio.playOnAwake = false; changes++; }
             EnsureComponent<CombatSfx>(instance, ref changes);
+            var shake = EnsureComponent<SimpleCameraShake>(instance, ref changes);
 
             // 2. Wire SerializeField refs on PlayerInput
             var playerInput = instance.GetComponent<PlayerInput>();
@@ -106,6 +107,11 @@ public static class SekiroAutoWire
                 AddPersistentListener(playerInput, "OnParrySuccess", tracker, "OnParrySuccess");
                 AddPersistentListener(playerInput, "OnBeingAttacked", tracker, "OnBeingAttacked");
                 AddPersistentListener(playerInput, "OnBeingAttacked", combo,   "ResetCombo");
+
+                // Camera shake on combat outcomes
+                AddPersistentListener(playerInput, "OnParrySuccess", shake, "ShakeMedium");
+                AddPersistentListener(playerInput, "OnMikiriSuccess", shake, "ShakeMedium");
+                AddPersistentListener(playerInput, "OnDodgeSuccess", shake, "ShakeLight");
             }
 
             // 3. Wire Agent.OnHitLanded → ComboCounter; OnAttackWhiffed → Tracker
@@ -114,6 +120,8 @@ public static class SekiroAutoWire
             {
                 AddPersistentListener(agent, "OnHitLanded", combo, "RegisterHit");
                 AddPersistentListener(agent, "OnAttackWhiffed", tracker, "OnAttackWhiff");
+                AddPersistentListener(agent, "OnHitLanded", shake, "ShakeLight");
+                AddPersistentListener(agent, "OnDeathblowDealt", shake, "ShakeHeavy");
             }
 
             // 4. Wire MikiriDetector arrow
