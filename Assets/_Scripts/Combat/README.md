@@ -200,14 +200,112 @@ HitStop 0.10s   HitStop 0.04s  HitStop 0.04s
 
 ---
 
-## 🚧 ที่ยังไม่มี (Phase 3)
+## ✅ Phase 3 (เพิ่ม — game feel polish)
 
-- Camera shake (Cinemachine Impulse Source — package ติดตั้งอยู่แล้ว)
-- Sound effects (parry "chink!", guard "thud", deathblow whoosh, telegraph hum)
-- Mikiri arrow indicator (Sekiro มีลูกศรเหนือหัว)
-- VFX particle prefabs (parry spark, sweep wind, deathblow burst)
-- Aggressive momentum reward (combo counter)
-- Boss-specific attack patterns (3-hit string, delayed strike)
+- **CombatSfx** — AudioSource wrapper, fire SFX ตาม UnityEvent (parry/guard/dodge/mikiri/clean hit/deathblow/posture break/perilous hum)
+- **CameraShakeOnHit** — wraps Cinemachine 2.10 `CinemachineImpulseSource`, มี Light/Medium/Heavy methods
+- **MikiriArrowIndicator** — spawn arrow prefab เหนือหัว enemy ตอนกำลัง thrust
+- **ComboCounter** — track player streak (decay 2.5 วิ), multiplier scaling 1x → 2.5x
+- **AIEnemy.PickStrategy** — Random (default) / Sequential (boss combo cycling)
+- **Agent UnityEvents** — `OnHitLanded` / `OnAttackParried` / `OnDeathblowDealt`
+- **MikiriDetector.OnIncomingThrust** — UnityEvent broadcast attacker (สำหรับ arrow indicator)
+
+### 🛠️ Editor Setup — Phase 3
+
+#### A. เตรียม assets (Designer / Ant)
+
+**Audio (8 clips, ใส่ใน `Assets/Audio/Combat/`):**
+| ไฟล์ | ใช้ที่ไหน | hint |
+|------|-----------|------|
+| `parry_spark.wav` | perfect parry | metallic high "chink!" |
+| `guard_thud.wav` | partial guard | low body thud |
+| `dodge_swoosh.wav` | i-frame roll | wind whoosh |
+| `mikiri_shing.wav` | counter success | sword shing + impact |
+| `clean_hit.wav` | normal hit | flesh impact |
+| `deathblow_impact.wav` | finisher | heavy crunch |
+| `posture_break.wav` | stagger trigger | glass shatter |
+| `perilous_hum.wav` | telegraph wind-up | ominous bass hum |
+
+**VFX prefabs (ใน `Assets/Prefabs/VFX/`):**
+- `MikiriArrow.prefab` — sprite arrow shape pointing down (จะ spawn เหนือหัว enemy)
+- (Phase 1 ของเดิมก็ใช้: `ParrySpark.prefab`, `ParryStance.prefab` — ถ้ายังไม่ทำ)
+
+#### B. Player Prefab
+
+1. **Add Component → `Audio Source`** (ปิด Play On Awake)
+2. **Add Component → `Combat Sfx`** — drag clip ทุกตัวลงใน Inspector
+3. **Add Component → `Mikiri Arrow Indicator`** — drag MikiriArrow.prefab
+4. **Add Component → `Combo Counter`** — link UI Text (optional)
+5. **Add Component → `Cinemachine Impulse Source`** (จาก Cinemachine package)
+6. **Add Component → `Camera Shake On Hit`**
+
+#### C. Wire UnityEvents (ใน Inspector)
+
+**Player.Agent:**
+- `OnHitLanded` →
+  - `ComboCounter.RegisterHit`
+  - `CameraShakeOnHit.ShakeLight`
+  - `CombatSfx.PlayCleanHit`
+- `OnAttackParried` (รวมถึงตอน Player ตีโดน enemy parry — ใน Phase 1 enemy ยัง parry ไม่ได้, leave for boss)
+- `OnDeathblowDealt` →
+  - `CameraShakeOnHit.ShakeHeavy`
+  - `CombatSfx.PlayDeathblow`
+
+**Player.PlayerInput:**
+- `OnParrySuccess` → `CombatSfx.PlayParry` + `CameraShakeOnHit.ShakeMedium`
+- `OnDodgeSuccess` → `CombatSfx.PlayDodge`
+- `OnMikiriSuccess` → `CombatSfx.PlayMikiri` + `CameraShakeOnHit.ShakeMedium`
+- `OnBeingAttacked` → `ComboCounter.ResetCombo` + `CombatSfx.PlayGuard` (ถ้าใช้)
+
+**Player.PostureManager:**
+- `OnPostureBroken` → `CombatSfx.PlayPostureBreak`
+
+**Player.MikiriDetector:**
+- `OnIncomingThrust` → `MikiriArrowIndicator.ShowFor` (drag attacker param ใน UnityEvent slot)
+- `OnMikiriSuccess` → `MikiriArrowIndicator.Hide`
+
+**Enemy.AIEnemy** (Boss only):
+- เปลี่ยน `Pick Strategy` เป็น **Sequential** + ใส่ attackPool ตามลำดับที่ต้องการ (เช่น Slash → Slash → Sweep → Thrust)
+
+#### D. ComboCounter UI (optional)
+
+ใน Canvas → สร้าง Text 2 อัน:
+- "Combo Text" — drag ลง `Combo Text` ใน ComboCounter
+- "Multiplier Text" — drag ลง `Multiplier Text`
+
+---
+
+## 🧪 Phase 3 Test Checklist
+
+- [ ] Parry สำเร็จ → ได้ยินเสียง "chink!" + camera shake medium
+- [ ] Mikiri counter → ได้ยิน "shing!" + camera shake medium + arrow หาย
+- [ ] Deathblow → camera shake หนัก + เสียง "crunch" + slow-mo (Phase 1)
+- [ ] ตี normal hit ติดกัน 5 ครั้ง → combo text "x5" + multiplier "1.50x"
+- [ ] โดน enemy ตี → combo reset เป็น 0
+- [ ] หยุดตี 2.5 วิ → combo decay เอง
+- [ ] Thrust telegraph → arrow โผล่เหนือหัว enemy
+- [ ] Boss enemy (Sequential) → ตี Slash → Slash → Sweep → Thrust ตามลำดับ ทุก loop เหมือนกัน
+- [ ] Goblin (Random) → ตี attack สุ่มต่างกันแต่ละรอบ
+
+---
+
+## 🎯 Done — full Sekiro stack
+
+| Layer | Phase 1 | Phase 2 | Phase 3 |
+|-------|:---:|:---:|:---:|
+| Posture system | ✅ | | |
+| Parry timing | ✅ | | |
+| Deathblow | ✅ | | |
+| Hit-stop | ✅ | | |
+| Perilous attacks | | ✅ | |
+| Mikiri counter | | ✅ | |
+| Dodge i-frames | | ✅ | |
+| Telegraph visuals | | ✅ | |
+| Camera shake | | | ✅ |
+| SFX hooks | | | ✅ |
+| Mikiri arrow | | | ✅ |
+| Combo counter | | | ✅ |
+| Boss patterns | | | ✅ |
 
 ---
 

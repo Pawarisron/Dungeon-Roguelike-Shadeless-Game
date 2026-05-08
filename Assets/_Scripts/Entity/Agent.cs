@@ -3,10 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Agent : MonoBehaviour
 {
+    [Header("Combat events (Phase 3 hooks)")]
+    public UnityEvent OnHitLanded;        // clean hit — wire to ComboCounter, CameraShakeLight, CombatSfx.PlayCleanHit
+    public UnityEvent OnAttackParried;    // we got deflected — wire to CameraShakeMedium, CombatSfx.PlayParry
+    public UnityEvent OnDeathblowDealt;   // staggered enemy slain — wire to CameraShakeHeavy, CombatSfx.PlayDeathblow
+
     
     private AgentAnimations agentAnimations;
 
@@ -111,6 +117,7 @@ public class Agent : MonoBehaviour
             var ourPosture = GetComponent<PostureManager>();
             if (ourPosture != null) ourPosture.TakePostureDamage(retaliation);
             HitStop.Trigger(hitStopOnParry);
+            OnAttackParried?.Invoke();
             return;
         }
 
@@ -121,6 +128,7 @@ public class Agent : MonoBehaviour
             var dmgable = hitTarget.GetComponent<IDamageAble>();
             if (dmgable != null) dmgable.TakeDamage(deathblowDamage);
             HitStop.Trigger(hitStopOnDeathblow);
+            OnDeathblowDealt?.Invoke();
             return;
         }
 
@@ -129,6 +137,7 @@ public class Agent : MonoBehaviour
         if (damageable != null) damageable.TakeDamage(hpDmg);
         if (targetPosture != null) targetPosture.TakePostureDamage(postureDmg);
         HitStop.Trigger(hitStopOnHit);
+        OnHitLanded?.Invoke();
     }
 
 

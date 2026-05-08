@@ -10,6 +10,7 @@ public class MikiriDetector : MonoBehaviour
     [SerializeField] private float mikiriPostureDamage = 60f;
 
     public UnityEvent OnMikiriSuccess;
+    public UnityEvent<MonoBehaviour> OnIncomingThrust;  // wire to MikiriArrowIndicator.ShowFor
 
     private MonoBehaviour incomingAttacker;
     private AttackDataSO incomingAttack;
@@ -35,6 +36,7 @@ public class MikiriDetector : MonoBehaviour
         incomingAttacker = attacker;
         incomingAttack = attack;
         windowExpiresAt = Time.time + attack.telegraphTime;
+        OnIncomingThrust?.Invoke(attacker);
     }
 
     public bool TryMikiri()

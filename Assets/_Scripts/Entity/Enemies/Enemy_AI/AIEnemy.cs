@@ -40,8 +40,13 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
     [SerializeField] private List<AttackDataSO> attackPool;
     [SerializeField] private AttackTelegraph telegraph;
 
+    public enum PickStrategy { Random, Sequential }
+    [Tooltip("Random = boss/grunt mix; Sequential = scripted boss combo (cycles through attackPool in order).")]
+    [SerializeField] private PickStrategy pickStrategy = PickStrategy.Random;
+
     private Agent cachedAgent;
     private AttackDataSO currentAttack;
+    private int sequenceIndex = 0;
 
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
@@ -188,6 +193,12 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
     private AttackDataSO PickAttack()
     {
         if (attackPool == null || attackPool.Count == 0) return null;
+        if (pickStrategy == PickStrategy.Sequential)
+        {
+            var pick = attackPool[sequenceIndex % attackPool.Count];
+            sequenceIndex++;
+            return pick;
+        }
         return attackPool[Random.Range(0, attackPool.Count)];
     }
 
