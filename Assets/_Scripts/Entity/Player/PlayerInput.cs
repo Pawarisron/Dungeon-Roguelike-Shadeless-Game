@@ -6,11 +6,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour, IDamageAble
+public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 {
     [SerializeField]
     private int attackDamage;
-    
+
     [SerializeField]
     private HealthManager healthManager;
 
@@ -19,15 +19,23 @@ public class PlayerInput : MonoBehaviour, IDamageAble
     [SerializeField]
     private CoinManager coinManager;
 
+    [Header("Sekiro Combat")]
+    [SerializeField] private ParryController parryController;
+    [SerializeField] private PostureManager postureManager;
+    [Tooltip("Posture damage taken when blocking without a perfect parry.")]
+    [SerializeField] private float guardedPostureDamage = 12f;
+    [Tooltip("HP damage multiplier when guarded but not parried (0=null, 1=full).")]
+    [Range(0f, 1f)] [SerializeField] private float guardedDamageMultiplier = 0.4f;
+
     private bool energyDrained = false;
     // [SerializeField]
     //private float attackDelay = 0.5f;
 
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
-    public UnityEvent OnRoll, OnBeingAttacked, OnDeath, OnAttack;
+    public UnityEvent OnRoll, OnBeingAttacked, OnDeath, OnAttack, OnParryPressed, OnParrySuccess;
 
     [SerializeField]
-    private InputActionReference movement, attack, pointerPosition, roll;
+    private InputActionReference movement, attack, pointerPosition, roll, parry;
     private bool isWaitingForAnimation = false;
     // public int MaxHealth => maxEnegy;
     // public int CurrentHealth => currentHealth;
@@ -60,6 +68,7 @@ public class PlayerInput : MonoBehaviour, IDamageAble
         movement.action.Enable();
         roll.action.Enable();
         attack.action.Enable();
+        if (parry != null && parry.action != null) parry.action.Enable();
     }
 
 
@@ -68,6 +77,8 @@ public class PlayerInput : MonoBehaviour, IDamageAble
     {
         attack.action.performed += PerformAttack;
         roll.action.performed += PerformRoll;
+        if (parry != null && parry.action != null)
+            parry.action.performed += PerformParry;
     }
 
 
@@ -75,6 +86,39 @@ public class PlayerInput : MonoBehaviour, IDamageAble
     {
         attack.action.performed -= PerformAttack;
         roll.action.performed -= PerformRoll;
+        if (parry != null && parry.action != null)
+            parry.action.performed -= PerformParry;
+    }
+
+    private void PerformParry(InputAction.CallbackContext context)
+    {
+        if (parryController != null) parryController.TriggerParry();
+        OnParryPressed?.Invoke();
+    }
+
+    // IParriable — called by the attacker (Agent.ResolveHit).
+    public bool TryParry(MonoBehaviour attacker, int incomingDamage)
+    {
+        if (parryController != null && parryController.IsInParryWindow)
+        {
+            parryController.NotifySuccess(transform.position);
+            OnParrySuccess?.Invoke();
+            return true;  // damage absorbed, attacker takes posture retaliation
+        }
+
+        // Not in parry window — partial guard if the parry button was held recently
+        // (cooldown counts as "blocking stance"). Otherwise full hit goes through TakeDamage.
+        if (parryController != null && parryController.IsOnCooldown)
+        {
+            int reduced = Mathf.Max(1, Mathf.RoundToInt(incomingDamage * guardedDamageMultiplier));
+            healthManager.TakeDamage(reduced);
+            if (postureManager != null) postureManager.TakePostureDamage(guardedPostureDamage);
+            OnBeingAttacked?.Invoke();
+            if (healthManager.isDeath) Die();
+            return true;  // we already applied damage; tell attacker not to double-hit
+        }
+
+        return false;  // open hit — let TakeDamage handle full damage
     }
 
     private void PerformAttack(InputAction.CallbackContext context)
