@@ -8,10 +8,11 @@ using UnityEngine.InputSystem;
 
 public class Agent : MonoBehaviour
 {
-    [Header("Combat events (Phase 3 hooks)")]
+    [Header("Combat events (Phase 3+4 hooks)")]
     public UnityEvent OnHitLanded;        // clean hit — wire to ComboCounter, CameraShakeLight, CombatSfx.PlayCleanHit
     public UnityEvent OnAttackParried;    // we got deflected — wire to CameraShakeMedium, CombatSfx.PlayParry
     public UnityEvent OnDeathblowDealt;   // staggered enemy slain — wire to CameraShakeHeavy, CombatSfx.PlayDeathblow
+    public UnityEvent OnAttackWhiffed;    // swing connected with nothing — wire to PlayerActionTracker.OnAttackWhiff
 
     
     private AgentAnimations agentAnimations;
@@ -90,6 +91,11 @@ public class Agent : MonoBehaviour
             }
             // detect colliders in range of attack
             Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRadious, targetLayer);
+
+            if (hitTargets.Length == 0)
+            {
+                OnAttackWhiffed?.Invoke();
+            }
 
             // resolve each hit through the Sekiro combat pipeline
             foreach (Collider2D hitTarget in hitTargets)

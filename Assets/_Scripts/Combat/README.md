@@ -289,23 +289,132 @@ HitStop 0.10s   HitStop 0.04s  HitStop 0.04s
 
 ---
 
-## 🎯 Done — full Sekiro stack
+## ✅ Phase 4 (เพิ่ม — Boss-grade AI Brain)
 
-| Layer | Phase 1 | Phase 2 | Phase 3 |
-|-------|:---:|:---:|:---:|
-| Posture system | ✅ | | |
-| Parry timing | ✅ | | |
-| Deathblow | ✅ | | |
-| Hit-stop | ✅ | | |
-| Perilous attacks | | ✅ | |
-| Mikiri counter | | ✅ | |
-| Dodge i-frames | | ✅ | |
-| Telegraph visuals | | ✅ | |
-| Camera shake | | | ✅ |
-| SFX hooks | | | ✅ |
-| Mikiri arrow | | | ✅ |
-| Combo counter | | | ✅ |
-| Boss patterns | | | ✅ |
+แทนที่ AI loop เดิมที่ "เข้าใส่ → ตี → รอ → ซ้ำ" ด้วย **Utility AI** ที่ตัดสินใจจริง: อ่านสถานะผู้เล่น, จัดการระยะ, punish whiff, feint parry-trigger-happy player, multi-enemy awareness, boss phase transitions
+
+### Architecture (Combat/AI/)
+
+```
+PlayerActionTracker     ← record player attack/roll/parry/whiff timestamps + counts
+PlayerPatternProfile    ← derives ParryFrequency / RollFrequency from tracker
+CombatContext           ← struct snapshot (16 fields)
+EnemyAction (abstract)  ← Score(ctx) + Execute(brain, ctx)
+Actions/
+  ├── Approach          ← walk toward target (score scales with distance)
+  ├── Retreat           ← walk away (score: own posture danger + recent damage)
+  ├── AttackNormal      ← parryable strike (score: in-range + whiff bonus)
+  ├── AttackPerilous    ← Sweep/Thrust/Crash (score: target posture + roll-spam)
+  ├── Feint             ← partial telegraph then cancel (score: target parry rate)
+  └── HoldGround        ← stand & regen posture (score: own posture critical)
+UtilityBrain            ← tick loop: snapshot → score → execute → cooldown → repeat
+BossPhaseSO             ← per-phase config (HP threshold + actions/pool/aggression)
+BossPhaseManager        ← swap phase when HP crosses thresholds
+```
+
+### Decision Flow (every tick ~0.08s)
+
+```
+Snapshot CombatContext from world
+  │
+  ├── Self: hp%, posture%, staggered, time since hit, allies near
+  └── Target: hp%, posture%, staggered, last action timing, parry/roll rates, boss phase
+  ↓
+Score every action via Score(ctx) × weightMultiplier
+  ↓
+Filter: skip if cooldown active, skip if score < minScoreToConsider
+  ↓
+Pick highest score → Execute coroutine (yields seconds)
+  ↓
+Set cooldown end-time + brief postActionDelay → loop
+```
+
+### 🛠️ Editor Setup — Phase 4
+
+#### A. Player Prefab — เพิ่ม 2 component
+
+1. **Add Component → `Player Action Tracker`** (no fields needed)
+2. **Add Component → `Player Pattern Profile`** (auto-fetches Tracker)
+
+#### B. Wire UnityEvents (PlayerInput → Tracker)
+
+ใน Player Prefab → PlayerInput component → ใน Inspector ทำ wiring:
+- `OnAttack` → `PlayerActionTracker.OnAttack`
+- `OnRoll` → `PlayerActionTracker.OnRoll`
+- `OnParryPressed` → `PlayerActionTracker.OnParryPressed`
+- `OnParrySuccess` → `PlayerActionTracker.OnParrySuccess`
+- `OnBeingAttacked` → `PlayerActionTracker.OnBeingAttacked`
+
+ใน Player Prefab → **Agent** component:
+- `OnAttackWhiffed` → `PlayerActionTracker.OnAttackWhiff`
+
+#### C. สร้าง Action assets
+
+ใน `Assets/Data/AI/` (สร้างโฟลเดอร์ใหม่):
+- คลิกขวา → Create → Combat/AI/Action: Approach → ตั้งชื่อ `Action_Approach_Default`
+- ทำซ้ำสำหรับทุก action: Retreat / AttackNormal / AttackPerilous / Feint / HoldGround
+- ปรับค่า weight, cooldown, thresholds ตามชอบ
+
+#### D. Enemy Prefab — เพิ่ม UtilityBrain
+
+1. **Add Component → `Utility Brain`**
+   - Actions: drag SO assets ที่ enemy นี้รู้จัก (เช่น Goblin = Approach + AttackNormal; Boss = ทุกอย่าง)
+   - Decision Tick Interval: `0.08`
+   - Post Action Delay: `0.2`
+   - Allies Scan Radius: `6`
+   - Allies Layer: `Enemies` layer
+
+2. **AIEnemy** field ใหม่:
+   - Utility Brain: drag self (จะ auto-fetch ถ้าไม่ใส่)
+
+3. **PostureManager** event ใหม่ (ถ้าอยากให้ brain ฉลาดเรื่อง hit reactions):
+   - `OnPostureBroken` → `UtilityBrain.NotifyTookHit`
+
+#### E. Boss Prefab — เพิ่ม BossPhaseManager
+
+1. สร้าง BossPhase SO assets ใน `Assets/Data/AI/Bosses/[BossName]/`:
+   - `Phase1_Normal.asset` — hpThreshold 1.0, actions = standard pool, aggressionMultiplier 1.0
+   - `Phase2_Aggressive.asset` — hpThreshold 0.5, actions += Feint + AttackPerilous, aggressionMultiplier 0.6
+   - `Phase3_Desperate.asset` — hpThreshold 0.25, actions = perilous-heavy, telegraphSpeedMultiplier 0.7
+
+2. **Add Component → `Boss Phase Manager`**
+   - Phases: drag 3 SO assets ตามลำดับ (Phase1 → Phase2 → Phase3)
+   - Audio Source: optional (เล่นเสียงตอนเปลี่ยน phase)
+
+---
+
+## 🧪 Phase 4 Test Checklist
+
+### Single Goblin (basic AI)
+- [ ] Goblin ไกลจาก player → score Approach สูง → เดินเข้า
+- [ ] อยู่ในระยะ → score AttackNormal สูง → ตี
+- [ ] Player attack แล้วพลาด (whiff) → goblin ตีกลับทันที (whiff punish)
+- [ ] โดน player ตี posture > 60% → goblin เลือก Retreat / HoldGround แทน push
+
+### Boss (with full pool + phases)
+- [ ] HP > 50% → ใช้ Approach + AttackNormal + Retreat (มาตรฐาน)
+- [ ] HP < 50% → unlocked Feint + AttackPerilous (Sweep/Thrust)
+- [ ] HP < 25% → telegraph เร็วขึ้น (telegraphSpeedMultiplier 0.7), อะกรอกขึ้น
+- [ ] Player parry บ่อย (rate > 0.5) → boss เริ่ม Feint หลอกบ่อย
+- [ ] Player roll บ่อย → boss เลือก Sweep / Thrust แทน Slash บ่อย
+- [ ] Boss posture > 70% → boss เลือก HoldGround เพื่อ regen
+
+### Multi-enemy (3 goblins)
+- [ ] 3 goblins → ตัวที่ใกล้สุดตี, ตัวที่อยู่ไกลกว่า score Retreat สูง (alliesNearby > 0 → ไม่ต้องรุม)
+
+---
+
+## 🎯 Done — full Sekiro stack + boss-grade AI
+
+| Layer | P1 | P2 | P3 | P4 |
+|-------|:---:|:---:|:---:|:---:|
+| Posture / Parry / Deathblow / Hit-stop | ✅ | | | |
+| Perilous attacks / Mikiri / Dodge i-frames / Telegraph | | ✅ | | |
+| Camera shake / SFX / Combo / Mikiri arrow / Boss patterns | | | ✅ | |
+| **Player tracking + pattern profile** | | | | ✅ |
+| **Utility AI brain (6 scored actions)** | | | | ✅ |
+| **Boss phase transitions (HP tiers)** | | | | ✅ |
+| **Whiff punish + Feint + Multi-enemy awareness** | | | | ✅ |
 
 ---
 

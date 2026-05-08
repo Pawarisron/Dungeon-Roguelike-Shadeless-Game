@@ -44,12 +44,16 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
     [Tooltip("Random = boss/grunt mix; Sequential = scripted boss combo (cycles through attackPool in order).")]
     [SerializeField] private PickStrategy pickStrategy = PickStrategy.Random;
 
+    [Tooltip("Optional. When set, AI delegates decisions to UtilityBrain instead of the legacy ChaseAndAttack loop.")]
+    [SerializeField] private UtilityBrain utilityBrain;
+
     private Agent cachedAgent;
     private AttackDataSO currentAttack;
     private int sequenceIndex = 0;
 
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
+    public AI_Data AiData => aiData;
 
     //Inputs sent from the Enemy AI to the Enemy controller
     public UnityEvent OnBeingAttacked, OnDeath, OnAttackPressed;
@@ -64,6 +68,7 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
         // set health
         currentHealth = maxHealth;
         cachedAgent = GetComponent<Agent>();
+        if (utilityBrain == null) utilityBrain = GetComponent<UtilityBrain>();
         // Detection Player and Obsticles around
         InvokeRepeating("PerformDetection", 0, attackParameter.detectionDelay);
 
@@ -95,7 +100,11 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
             if (following == false)
             {
                 following = true;
-                StartCoroutine(ChaseAndAttack());
+                // Phase 4: delegate to UtilityBrain when present, else legacy loop.
+                if (utilityBrain != null)
+                    StartCoroutine(BrainLoop());
+                else
+                    StartCoroutine(ChaseAndAttack());
             }
         }
         else if (aiData.GetTargetsCount() > 0)
@@ -107,6 +116,12 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
         OnMovementInput?.Invoke(movementInput);
     }
 
+    private IEnumerator BrainLoop()
+    {
+        yield return utilityBrain.RunLoop();
+        following = false;
+    }
+
     public void TakeDamage(int damage)
     {
         // decrease health
@@ -114,6 +129,9 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
 
         // play hurt animation
         OnBeingAttacked?.Invoke();
+
+        // tell brain so it can score Retreat / HoldGround higher
+        if (utilityBrain != null) utilityBrain.NotifyTookHit();
 
         // die
         if(currentHealth <= 0)
@@ -224,4 +242,50 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
     }
 
     public int GetCurrentHealth() => currentHealth;
+
+    // ===== Phase 4 — public API used by UtilityBrain & boss systems =====
+
+    public Vector2 ComputeChaseDirection()
+    {
+        if (movementDirectionSolver == null || steeringBehaviours == null) return Vector2.zero;
+        return movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
+    }
+
+    public void SetExternalMovement(Vector2 v) => movementInput = v;
+
+    public AttackDataSO PickAttackOfType(AttackDataSO.AttackType type)
+    {
+        if (attackPool == null || attackPool.Count == 0) return null;
+        var matches = new List<AttackDataSO>();
+        foreach (var a in attackPool) if (a != null && a.type == type) matches.Add(a);
+        if (matches.Count == 0) return null;
+        return matches[Random.Range(0, matches.Count)];
+    }
+
+    public AttackDataSO PickAttackPerilous()
+    {
+        if (attackPool == null || attackPool.Count == 0) return null;
+        var matches = new List<AttackDataSO>();
+        foreach (var a in attackPool) if (a != null && a.IsPerilous) matches.Add(a);
+        if (matches.Count == 0) return null;
+        return matches[Random.Range(0, matches.Count)];
+    }
+
+    public void SetAttackPool(List<AttackDataSO> pool)
+    {
+        attackPool = pool;
+        sequenceIndex = 0;
+    }
+
+    // Brain-driven attack: extracted from ChaseAndAttack so the brain can yield on it.
+    public IEnumerator RunAttack(AttackDataSO attack)
+    {
+        if (attack == null) yield break;
+        currentAttack = attack;
+        if (cachedAgent != null) cachedAgent.SetPendingAttack(currentAttack);
+        BroadcastForMikiri(currentAttack);
+        yield return PlayTelegraph(currentAttack);
+        OnAttackPressed?.Invoke();
+        yield return new WaitForSeconds(attackParameter.attackDelay);
+    }
 }
