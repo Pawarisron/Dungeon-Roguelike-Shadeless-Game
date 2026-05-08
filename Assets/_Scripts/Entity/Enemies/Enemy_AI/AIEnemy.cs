@@ -35,6 +35,14 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
     [SerializeField]
     private ContextSolver movementDirectionSolver;
 
+    [Header("Sekiro Combat (Phase 2)")]
+    [Tooltip("Pool of attacks this enemy randomly picks from. Leave empty to use Agent's legacy values.")]
+    [SerializeField] private List<AttackDataSO> attackPool;
+    [SerializeField] private AttackTelegraph telegraph;
+
+    private Agent cachedAgent;
+    private AttackDataSO currentAttack;
+
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
 
@@ -50,6 +58,7 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
     {
         // set health
         currentHealth = maxHealth;
+        cachedAgent = GetComponent<Agent>();
         // Detection Player and Obsticles around
         InvokeRepeating("PerformDetection", 0, attackParameter.detectionDelay);
 
@@ -144,41 +153,63 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
         this.enabled = false;
     }
 
+    // Phase 2 refactor: while-loop replaces recursive StartCoroutine — single IEnumerator
+    // instance per chase, no per-tick allocations.
     private IEnumerator ChaseAndAttack()
     {
-        if (steeringBehaviours == null) { yield break; }
-        if (aiData.currentTarget == null)
-        {
-            // Stopping Logic
-            //Debug.Log("Stopping");
-            movementInput = Vector2.zero;
-            following = false;
-            yield break;
-        }
-        else
+        while (steeringBehaviours != null && aiData.currentTarget != null)
         {
             float distance = Vector2.Distance(aiData.currentTarget.position, transform.position);
 
-
             if (distance < attackParameter.attackDistance)
             {
-                Debug.Log("AIEnemy.ChaseAttack distance " + distance);
-                //Attack logic
                 movementInput = Vector2.zero;
+
+                // Phase 2: pick attack, broadcast for Mikiri, telegraph, then strike.
+                currentAttack = PickAttack();
+                if (cachedAgent != null) cachedAgent.SetPendingAttack(currentAttack);
+                BroadcastForMikiri(currentAttack);
+                yield return PlayTelegraph(currentAttack);
+
                 OnAttackPressed?.Invoke();
                 yield return new WaitForSeconds(attackParameter.attackDelay);
-                StartCoroutine(ChaseAndAttack());
             }
             else
             {
-                //Chase logic
                 movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
                 yield return new WaitForSeconds(attackParameter.aiUpdateDelay);
-                StartCoroutine(ChaseAndAttack());
             }
-
         }
 
+        movementInput = Vector2.zero;
+        following = false;
+    }
+
+    private AttackDataSO PickAttack()
+    {
+        if (attackPool == null || attackPool.Count == 0) return null;
+        return attackPool[Random.Range(0, attackPool.Count)];
+    }
+
+    private void BroadcastForMikiri(AttackDataSO attack)
+    {
+        if (attack == null || !attack.CanBeMikiri) return;
+        if (aiData.currentTarget == null) return;
+        var mikiri = aiData.currentTarget.GetComponent<MikiriDetector>();
+        if (mikiri != null) mikiri.RegisterIncoming(this, attack);
+    }
+
+    private IEnumerator PlayTelegraph(AttackDataSO attack)
+    {
+        if (attack == null) yield break;
+        if (telegraph != null)
+        {
+            yield return StartCoroutine(telegraph.Play(attack));
+        }
+        else if (attack.telegraphTime > 0f)
+        {
+            yield return new WaitForSeconds(attack.telegraphTime);
+        }
     }
 
     public int GetCurrentHealth() => currentHealth;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IParriable
 {
-    // Returns true if the incoming attack is parried.
-    // attacker is the source Agent (used for posture retaliation).
-    bool TryParry(MonoBehaviour attacker, int incomingDamage);
+    // attack may be null when the source has no AttackDataSO assigned (legacy / Player default).
+    // Returns true if the target absorbed/handled the hit (attacker should NOT call TakeDamage).
+    bool TryParry(MonoBehaviour attacker, AttackDataSO attack, int incomingDamage);
 }

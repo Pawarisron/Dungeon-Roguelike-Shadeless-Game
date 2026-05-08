@@ -22,6 +22,8 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     [Header("Sekiro Combat")]
     [SerializeField] private ParryController parryController;
     [SerializeField] private PostureManager postureManager;
+    [SerializeField] private MikiriDetector mikiriDetector;
+    [SerializeField] private DodgeController dodgeController;
     [Tooltip("Posture damage taken when blocking without a perfect parry.")]
     [SerializeField] private float guardedPostureDamage = 12f;
     [Tooltip("HP damage multiplier when guarded but not parried (0=null, 1=full).")]
@@ -32,7 +34,7 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     //private float attackDelay = 0.5f;
 
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
-    public UnityEvent OnRoll, OnBeingAttacked, OnDeath, OnAttack, OnParryPressed, OnParrySuccess;
+    public UnityEvent OnRoll, OnBeingAttacked, OnDeath, OnAttack, OnParryPressed, OnParrySuccess, OnMikiriSuccess, OnDodgeSuccess;
 
     [SerializeField]
     private InputActionReference movement, attack, pointerPosition, roll, parry;
@@ -97,17 +99,41 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     }
 
     // IParriable — called by the attacker (Agent.ResolveHit).
-    public bool TryParry(MonoBehaviour attacker, int incomingDamage)
+    // Returns true if we handled the hit (attacker should NOT call TakeDamage afterwards).
+    public bool TryParry(MonoBehaviour attacker, AttackDataSO attack, int incomingDamage)
     {
+        // 1. Mikiri already happened on a Thrust — the strike is null and void.
+        if (attack != null && attack.CanBeMikiri && mikiriDetector != null && mikiriDetector.DidMikiri(attacker))
+        {
+            return true;
+        }
+
+        // 2. Sweep / Crash — must i-frame through with a roll. Parry is impossible.
+        if (attack != null && attack.MustDodge)
+        {
+            if (dodgeController != null && dodgeController.IsInDodgeWindow)
+            {
+                OnDodgeSuccess?.Invoke();
+                return true;  // i-framed, no damage
+            }
+            return false;  // open hit — full damage via TakeDamage
+        }
+
+        // 3. Perilous Thrust without Mikiri — also unparriable; let it land.
+        if (attack != null && !attack.IsParryable)
+        {
+            return false;
+        }
+
+        // 4. Normal attack — perfect parry window check.
         if (parryController != null && parryController.IsInParryWindow)
         {
             parryController.NotifySuccess(transform.position);
             OnParrySuccess?.Invoke();
-            return true;  // damage absorbed, attacker takes posture retaliation
+            return true;
         }
 
-        // Not in parry window — partial guard if the parry button was held recently
-        // (cooldown counts as "blocking stance"). Otherwise full hit goes through TakeDamage.
+        // 5. Partial guard during parry cooldown.
         if (parryController != null && parryController.IsOnCooldown)
         {
             int reduced = Mathf.Max(1, Mathf.RoundToInt(incomingDamage * guardedDamageMultiplier));
@@ -115,10 +141,10 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
             if (postureManager != null) postureManager.TakePostureDamage(guardedPostureDamage);
             OnBeingAttacked?.Invoke();
             if (healthManager.isDeath) Die();
-            return true;  // we already applied damage; tell attacker not to double-hit
+            return true;
         }
 
-        return false;  // open hit — let TakeDamage handle full damage
+        return false;  // open hit — Agent will call TakeDamage with full damage
     }
 
     private void PerformAttack(InputAction.CallbackContext context)
@@ -130,6 +156,13 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     }
     private void PerformRoll(InputAction.CallbackContext context)
     {
+        // Sekiro Phase 2: roll = Mikiri (vs Thrust) + i-frames (vs Sweep/Crash)
+        if (mikiriDetector != null && mikiriDetector.TryMikiri())
+        {
+            OnMikiriSuccess?.Invoke();
+        }
+        if (dodgeController != null) dodgeController.TriggerDodge();
+
         // if you have roll animaion enable these
         // movement.action?.Disable();
         // attack.action.Disable();

@@ -131,14 +131,83 @@ HitStop 0.10s   HitStop 0.04s  HitStop 0.04s
 
 ---
 
-## 🚧 ที่ยังไม่มี (Phase 2/3)
+## ✅ Phase 2 (เพิ่ม)
 
-- Perilous attacks (สีแดง telegraph) — ต้องเพิ่ม `AttackDataSO` + แก้ `AIEnemy.ChaseAndAttack` ให้ broadcast attack type
-- Mikiri counter (roll into thrust)
-- Sweep dodge requirement
-- Camera shake (Cinemachine Impulse Source)
-- Sound effects (parry "chink!", guard "thud", deathblow whoosh)
-- Aggressive momentum reward (combo bonus)
+- **AttackDataSO** — ScriptableObject กำหนด attack type/damage/telegraph
+- **AttackTelegraph** — sprite flash + perilous indicator ก่อนปล่อย attack
+- **MikiriDetector** — roll ใส่ thrust attack = counter (posture damage 60 + cancel attack)
+- **DodgeController** — i-frames ตอน roll = ผ่าน sweep/crash ได้
+- **AIEnemy refactor** — recursive coroutine → while loop (ฟิกซ์ memory bug + ใส่ telegraph flow)
+
+### 4 Attack Types (AttackDataSO.AttackType)
+
+| Type | Parry | Mikiri | Dodge | สีtelegraph |
+|------|:-----:|:------:|:-----:|------------|
+| `Normal` | ✅ | — | — | ขาว |
+| `Perilous_Sweep` | ❌ | ❌ | ✅ ต้อง roll | แดง |
+| `Perilous_Thrust` | ❌ | ✅ roll เข้า | — | แดง + ลูกศร |
+| `Perilous_Crash` | ❌ | ❌ | ✅ ต้อง roll | แดง + crash |
+
+## 🛠️ Editor Setup — Phase 2
+
+### A. สร้าง AttackData assets
+
+ใน `Assets/Data/Combat/` (สร้างโฟลเดอร์ใหม่):
+- คลิกขวา → Create → Combat → Attack Data
+- สร้างอย่างน้อย 4 อัน:
+  - `Atk_Slash` — Normal, hpDamage 20, postureDmg 18, telegraph 0.35s
+  - `Atk_Sweep` — Perilous_Sweep, hpDamage 30, postureDmg 25, telegraph 0.55s
+  - `Atk_Thrust` — Perilous_Thrust, hpDamage 25, postureDmg 30, telegraph 0.50s
+  - `Atk_Crash` — Perilous_Crash, hpDamage 40, postureDmg 35, telegraph 0.60s
+
+### B. Player Prefab — เพิ่ม 2 component
+
+1. **Add Component → `Mikiri Detector`**
+   - Mikiri Posture Damage: `60`
+
+2. **Add Component → `Dodge Controller`**
+   - Dodge Duration: `0.30`
+   - Cooldown: `0.15`
+
+3. **PlayerInput** field ใหม่:
+   - Mikiri Detector: drag self
+   - Dodge Controller: drag self
+
+### C. Enemy Prefab — เพิ่ม telegraph + attack pool
+
+1. **Add Component → `Attack Telegraph`**
+   - Sprite Renderer: drag enemy SpriteRenderer
+   - Perilous Indicator: drag GameObject ที่เป็นสัญลักษณ์ "危" หรือ "!" (สร้างเป็น child ของ enemy)
+   - Pulses: `3`
+
+2. **AIEnemy** field ใหม่:
+   - Attack Pool: drag AttackData assets ที่อยากให้ enemy นี้ใช้ (เช่น `Atk_Slash` 70%, `Atk_Sweep` 30% — random pick)
+   - Telegraph: drag self
+
+> **Tips**: Mini-boss / boss ควรมี attack pool ครบ 4 ชนิด. Goblin ปกติแค่ Normal 1 อันก็พอ
+
+---
+
+## 🧪 Phase 2 Test Checklist (เพิ่มจากเดิม)
+
+- [ ] Enemy ติด Sweep attack → sprite flash แดงก่อนตี → ผู้เล่น **ห้ามกดอะไร = ตายเต็ม**
+- [ ] Sweep มา → กด **roll ในจังหวะ telegraph** = ไม่โดนเลย (i-frame)
+- [ ] Sweep มา → กด **parry** = ไม่ป้องกัน (โดนเต็ม) — เพราะ unparriable
+- [ ] Thrust telegraph (สีแดง + ลูกศร) → กด **roll เข้าหา** = enemy stagger ทันที (Mikiri)
+- [ ] Thrust ผ่าน Mikiri = ผู้เล่นไม่เสีย HP (cancel attack)
+- [ ] Normal attack มา → parry ปกติ ใช้งานได้เหมือน Phase 1
+- [ ] AIEnemy ตี → memory profiler ไม่มี IEnumerator allocations ทุกวินาที (recursive bug fix)
+
+---
+
+## 🚧 ที่ยังไม่มี (Phase 3)
+
+- Camera shake (Cinemachine Impulse Source — package ติดตั้งอยู่แล้ว)
+- Sound effects (parry "chink!", guard "thud", deathblow whoosh, telegraph hum)
+- Mikiri arrow indicator (Sekiro มีลูกศรเหนือหัว)
+- VFX particle prefabs (parry spark, sweep wind, deathblow burst)
+- Aggressive momentum reward (combo counter)
+- Boss-specific attack patterns (3-hit string, delayed strike)
 
 ---
 

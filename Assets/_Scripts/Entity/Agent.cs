@@ -21,7 +21,7 @@ public class Agent : MonoBehaviour
     public bool showAttackGizmos = false;
     public Sprite deathSprite = null;
 
-    [Header("Sekiro Combat")]
+    [Header("Sekiro Combat — fallback when no AttackDataSO is set")]
     [Tooltip("Posture inflicted on the target on a clean hit.")]
     public float postureDamageOnHit = 18f;
     [Tooltip("Posture this attacker eats when its swing is parried.")]
@@ -34,6 +34,11 @@ public class Agent : MonoBehaviour
     public float hitStopOnParry = 0.10f;
     [Tooltip("Hit-stop seconds on a deathblow.")]
     public float hitStopOnDeathblow = 0.20f;
+
+    // Set by AIEnemy (or any controller) BEFORE OnAttackPressed → PerformAttack.
+    // Cleared automatically after OnAttackAnimation runs.
+    private AttackDataSO pendingAttack;
+    public void SetPendingAttack(AttackDataSO attack) => pendingAttack = attack;
 
 
     private Vector2 pointerInput, movementInput;
@@ -87,17 +92,24 @@ public class Agent : MonoBehaviour
             }
         }
 
+        // Single-shot: clear the pending attack so the next swing starts fresh.
+        pendingAttack = null;
     }
 
     private void ResolveHit(Collider2D hitTarget)
     {
+        // Read attack values from AttackDataSO if set, otherwise fall back to inspector fields.
+        int hpDmg = pendingAttack != null ? pendingAttack.hpDamage : attackDamage;
+        float postureDmg = pendingAttack != null ? pendingAttack.postureDamage : postureDamageOnHit;
+        float retaliation = pendingAttack != null ? pendingAttack.parryRetaliationPosture : parryRetaliationPosture;
+
         // 1. Parry — does the target catch our blade?
         var parriable = hitTarget.GetComponent<IParriable>();
-        if (parriable != null && parriable.TryParry(this, attackDamage))
+        if (parriable != null && parriable.TryParry(this, pendingAttack, hpDmg))
         {
             // We just got deflected — eat posture damage ourselves.
             var ourPosture = GetComponent<PostureManager>();
-            if (ourPosture != null) ourPosture.TakePostureDamage(parryRetaliationPosture);
+            if (ourPosture != null) ourPosture.TakePostureDamage(retaliation);
             HitStop.Trigger(hitStopOnParry);
             return;
         }
@@ -114,8 +126,8 @@ public class Agent : MonoBehaviour
 
         // 3. Clean hit — HP damage AND posture pressure.
         var damageable = hitTarget.GetComponent<IDamageAble>();
-        if (damageable != null) damageable.TakeDamage(attackDamage);
-        if (targetPosture != null) targetPosture.TakePostureDamage(postureDamageOnHit);
+        if (damageable != null) damageable.TakeDamage(hpDmg);
+        if (targetPosture != null) targetPosture.TakePostureDamage(postureDmg);
         HitStop.Trigger(hitStopOnHit);
     }
 
