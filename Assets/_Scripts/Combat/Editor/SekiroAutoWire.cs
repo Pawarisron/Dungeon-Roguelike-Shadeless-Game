@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 // One-click wiring for the Sekiro combat stack. Adds the new components to the
 // Player + enemy prefabs, sets the SerializeField references on PlayerInput,
@@ -18,6 +19,10 @@ public static class SekiroAutoWire
 {
     private const string PLAYER_PATH = "Assets/Prefabs/Agents/Player.prefab";
     private const string ATTACK_DATA_FOLDER = "Assets/Data/Combat";
+    private const string INPUT_ACTIONS_PATH = "Assets/_Scripts/Entity/Player/New Controls.inputactions";
+    private const string ACTION_MAP_NAME = "PlayerInput";
+    private const string PARRY_ACTION_NAME = "Parry";
+    private const string PARRY_BINDING_PATH = "<Mouse>/rightButton";
 
     private static readonly string[] EnemyPaths = {
         "Assets/Prefabs/Agents/Orc.prefab",
@@ -31,8 +36,10 @@ public static class SekiroAutoWire
     public static void WireEverything()
     {
         int log = 0;
+        log += AddParryInputAction();
         log += CreateDefaultAttackData();
         log += WirePlayer();
+        log += WireParryReferenceToPlayer();
         log += WireAllEnemies();
         log += WireBoss();
         AssetDatabase.SaveAssets();
@@ -40,15 +47,12 @@ public static class SekiroAutoWire
 
         EditorUtility.DisplayDialog("Sekiro Auto-Wire — Done",
             $"{log} change(s) applied. See Console for details.\n\n" +
-            "MANUAL STEPS REMAINING:\n" +
-            "1. Add 'Parry' Action to:\n" +
-            "   Assets/_Scripts/Entity/Player/New Controls.inputactions\n" +
-            "   • Action type: Button\n" +
-            "   • Binding: <Mouse>/rightButton\n\n" +
-            "2. Drag the Parry InputActionReference into:\n" +
-            "   Player.prefab → PlayerInput.parry\n\n" +
-            "3. (Optional) Wire UnityEvents per Combat/README.md\n\n" +
-            "4. Open DunLevel1 scene → Press Play → enjoy.",
+            "Parry input is now bound to RIGHT MOUSE BUTTON.\n\n" +
+            "OPTIONAL:\n" +
+            "• Wire AttackData → enemy.attackPool to enable Perilous attacks\n" +
+            "• Wire any extra UnityEvents per Combat/README.md\n" +
+            "• Add a Posture UI Image and drag it into PostureManager.postureBar\n\n" +
+            "Open DunLevel1 scene → Press Play → enjoy.",
             "OK");
     }
 
@@ -164,6 +168,104 @@ public static class SekiroAutoWire
 
             PrefabUtility.SaveAsPrefabAsset(instance, path);
             Debug.Log($"<color=#7ee37e>[SekiroAutoWire] ✓ {Path.GetFileNameWithoutExtension(path)} wired</color> ({changes} change(s), boss={isBoss})");
+        }
+        finally { PrefabUtility.UnloadPrefabContents(instance); }
+        return changes;
+    }
+
+    [MenuItem("Tools/Sekiro Combat/Add Parry Input Action")]
+    public static int AddParryInputAction()
+    {
+        var asset = AssetDatabase.LoadAssetAtPath<InputActionAsset>(INPUT_ACTIONS_PATH);
+        if (asset == null)
+        {
+            Debug.LogError($"[SekiroAutoWire] InputActionAsset not found at {INPUT_ACTIONS_PATH}");
+            return 0;
+        }
+
+        var map = asset.FindActionMap(ACTION_MAP_NAME);
+        if (map == null)
+        {
+            Debug.LogError($"[SekiroAutoWire] Action map '{ACTION_MAP_NAME}' not found in {INPUT_ACTIONS_PATH}");
+            return 0;
+        }
+
+        if (map.FindAction(PARRY_ACTION_NAME) != null)
+        {
+            Debug.Log("[SekiroAutoWire] Parry action already exists — skipping.");
+            return 0;
+        }
+
+        var action = map.AddAction(PARRY_ACTION_NAME, InputActionType.Button);
+        action.AddBinding(PARRY_BINDING_PATH);
+
+        // Persist via JSON round-trip — works across all InputSystem versions.
+        File.WriteAllText(INPUT_ACTIONS_PATH, asset.ToJson());
+        AssetDatabase.ImportAsset(INPUT_ACTIONS_PATH);
+
+        Debug.Log($"<color=#7ee37e>[SekiroAutoWire] ✓ Added Parry action</color> bound to {PARRY_BINDING_PATH}");
+        return 1;
+    }
+
+    [MenuItem("Tools/Sekiro Combat/Wire Parry Reference to Player")]
+    public static int WireParryReferenceToPlayer()
+    {
+        var asset = AssetDatabase.LoadAssetAtPath<InputActionAsset>(INPUT_ACTIONS_PATH);
+        if (asset == null) return 0;
+        var map = asset.FindActionMap(ACTION_MAP_NAME);
+        var action = map != null ? map.FindAction(PARRY_ACTION_NAME) : null;
+        if (action == null)
+        {
+            Debug.LogError("[SekiroAutoWire] Parry action missing — run 'Add Parry Input Action' first.");
+            return 0;
+        }
+
+        // Look for an existing InputActionReference sub-asset that points at this action.
+        InputActionReference parryRef = null;
+        foreach (var sub in AssetDatabase.LoadAllAssetsAtPath(INPUT_ACTIONS_PATH))
+        {
+            if (sub is InputActionReference iar && iar.action != null && iar.action.id == action.id)
+            {
+                parryRef = iar;
+                break;
+            }
+        }
+
+        // Create one if Unity hasn't auto-generated it yet.
+        if (parryRef == null)
+        {
+            parryRef = ScriptableObject.CreateInstance<InputActionReference>();
+            parryRef.name = $"{ACTION_MAP_NAME}/{PARRY_ACTION_NAME}";
+            var refSo = new SerializedObject(parryRef);
+            var assetProp = refSo.FindProperty("m_Asset");
+            var idProp = refSo.FindProperty("m_ActionId");
+            if (assetProp != null) assetProp.objectReferenceValue = asset;
+            if (idProp != null) idProp.stringValue = $"{{{action.id}}}";
+            refSo.ApplyModifiedProperties();
+            AssetDatabase.AddObjectToAsset(parryRef, asset);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.ImportAsset(INPUT_ACTIONS_PATH);
+        }
+
+        // Drop the reference onto PlayerInput.parry on the prefab.
+        var playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PLAYER_PATH);
+        if (playerPrefab == null) return 0;
+        int changes = 0;
+        var instance = PrefabUtility.LoadPrefabContents(PLAYER_PATH);
+        try
+        {
+            var pi = instance.GetComponent<PlayerInput>();
+            if (pi == null) return 0;
+            var so = new SerializedObject(pi);
+            var prop = so.FindProperty("parry");
+            if (prop != null && prop.objectReferenceValue != parryRef)
+            {
+                prop.objectReferenceValue = parryRef;
+                so.ApplyModifiedProperties();
+                PrefabUtility.SaveAsPrefabAsset(instance, PLAYER_PATH);
+                changes++;
+                Debug.Log("<color=#7ee37e>[SekiroAutoWire] ✓ Parry reference linked to PlayerInput.parry</color>");
+            }
         }
         finally { PrefabUtility.UnloadPrefabContents(instance); }
         return changes;
