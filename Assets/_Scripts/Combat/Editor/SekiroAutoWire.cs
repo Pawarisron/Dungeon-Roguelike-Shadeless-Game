@@ -19,18 +19,25 @@ public static class SekiroAutoWire
 {
     private const string PLAYER_PATH = "Assets/Prefabs/Agents/Player.prefab";
     private const string ATTACK_DATA_FOLDER = "Assets/Data/Combat";
+    private const string AI_ACTIONS_FOLDER = "Assets/Data/AI";
     private const string INPUT_ACTIONS_PATH = "Assets/_Scripts/Entity/Player/New Controls.inputactions";
     private const string ACTION_MAP_NAME = "PlayerInput";
     private const string PARRY_ACTION_NAME = "Parry";
     private const string PARRY_BINDING_PATH = "<Mouse>/rightButton";
 
-    private static readonly string[] EnemyPaths = {
+    // Tier-0 grunts: simple AI, normal attacks only.
+    private static readonly string[] GruntPaths = {
         "Assets/Prefabs/Agents/Orc.prefab",
-        "Assets/Prefabs/Agents/GiantOrc.prefab",
-        "Assets/Prefabs/Agents/Orc Behaviro Testing.prefab",
         "Assets/Prefabs/Agents/NPC-Solider.prefab",
     };
+    // Tier-1 elites: smarter AI, can throw a Sweep.
+    private static readonly string[] ElitePaths = {
+        "Assets/Prefabs/Agents/GiantOrc.prefab",
+        "Assets/Prefabs/Agents/Orc Behaviro Testing.prefab",
+    };
     private const string BOSS_PATH = "Assets/Prefabs/Agents/GiantOrc Boss.prefab";
+
+    private enum EnemyTier { Grunt, Elite, Boss }
 
     [MenuItem("Tools/Sekiro Combat/Auto-Wire Everything")]
     public static void WireEverything()
@@ -38,6 +45,7 @@ public static class SekiroAutoWire
         int log = 0;
         log += AddParryInputAction();
         log += CreateDefaultAttackData();
+        log += CreateDefaultEnemyActions();
         log += WirePlayer();
         log += WireParryReferenceToPlayer();
         log += WireAllEnemies();
@@ -123,14 +131,15 @@ public static class SekiroAutoWire
     public static int WireAllEnemies()
     {
         int total = 0;
-        foreach (var p in EnemyPaths) total += WireEnemy(p, isBoss: false);
+        foreach (var p in GruntPaths) total += WireEnemy(p, EnemyTier.Grunt);
+        foreach (var p in ElitePaths) total += WireEnemy(p, EnemyTier.Elite);
         return total;
     }
 
     [MenuItem("Tools/Sekiro Combat/Auto-Wire Boss")]
-    public static int WireBoss() => WireEnemy(BOSS_PATH, isBoss: true);
+    public static int WireBoss() => WireEnemy(BOSS_PATH, EnemyTier.Boss);
 
-    private static int WireEnemy(string path, bool isBoss)
+    private static int WireEnemy(string path, EnemyTier tier)
     {
         var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         if (prefab == null) { Debug.LogWarning($"[SekiroAutoWire] skipped (not found): {path}"); return 0; }
@@ -143,34 +152,163 @@ public static class SekiroAutoWire
             EnsureComponent<DeathblowMarker>(instance, ref changes);
             EnsureComponent<AttackTelegraph>(instance, ref changes);
 
-            // Larger enemies / boss have higher posture pools
+            // Posture pool scales with tier.
             if (posture != null)
             {
                 var so = new SerializedObject(posture);
                 var max = so.FindProperty("maxPosture");
-                if (max != null) { max.floatValue = isBoss ? 140f : 60f; changes++; }
+                if (max != null)
+                {
+                    float target = tier switch { EnemyTier.Grunt => 50f, EnemyTier.Elite => 80f, EnemyTier.Boss => 140f, _ => 60f };
+                    if (!Mathf.Approximately(max.floatValue, target)) { max.floatValue = target; changes++; }
+                }
                 so.ApplyModifiedProperties();
             }
 
-            if (isBoss)
+            // Every enemy now gets a UtilityBrain (grunts use a smaller action pool).
+            var brain = EnsureComponent<UtilityBrain>(instance, ref changes);
+
+            if (tier == EnemyTier.Boss)
             {
-                EnsureComponent<UtilityBrain>(instance, ref changes);
                 EnsureComponent<BossPhaseManager>(instance, ref changes);
             }
 
-            // Wire AIEnemy.OnBeingAttacked → UtilityBrain.NotifyTookHit (if brain present)
-            var brain = instance.GetComponent<UtilityBrain>();
+            // Auto-fill brain.actions if empty.
+            AssignBrainActions(brain, tier, ref changes);
+
+            // Auto-fill AIEnemy.attackPool if empty.
             var aiEnemy = instance.GetComponent<AIEnemy>();
+            AssignAttackPool(aiEnemy, tier, ref changes);
+
+            // Wire AIEnemy.OnBeingAttacked → UtilityBrain.NotifyTookHit
             if (brain != null && aiEnemy != null)
             {
                 AddPersistentListener(aiEnemy, "OnBeingAttacked", brain, "NotifyTookHit");
             }
 
             PrefabUtility.SaveAsPrefabAsset(instance, path);
-            Debug.Log($"<color=#7ee37e>[SekiroAutoWire] ✓ {Path.GetFileNameWithoutExtension(path)} wired</color> ({changes} change(s), boss={isBoss})");
+            Debug.Log($"<color=#7ee37e>[SekiroAutoWire] ✓ {Path.GetFileNameWithoutExtension(path)} wired</color> ({changes} change(s), tier={tier})");
         }
         finally { PrefabUtility.UnloadPrefabContents(instance); }
         return changes;
+    }
+
+    private static void AssignBrainActions(UtilityBrain brain, EnemyTier tier, ref int changes)
+    {
+        if (brain == null) return;
+        var so = new SerializedObject(brain);
+        var actionsProp = so.FindProperty("actions");
+        if (actionsProp == null) return;
+        if (actionsProp.arraySize > 0) return;  // designer already filled it — leave alone
+
+        var (approach, retreat, atkNormal, atkPerilous, feint, hold) = LoadEnemyActions();
+        var picks = new List<EnemyAction>();
+        switch (tier)
+        {
+            case EnemyTier.Grunt:
+                if (approach   != null) picks.Add(approach);
+                if (atkNormal  != null) picks.Add(atkNormal);
+                if (retreat    != null) picks.Add(retreat);
+                if (hold       != null) picks.Add(hold);
+                break;
+            case EnemyTier.Elite:
+                if (approach   != null) picks.Add(approach);
+                if (atkNormal  != null) picks.Add(atkNormal);
+                if (atkPerilous!= null) picks.Add(atkPerilous);
+                if (retreat    != null) picks.Add(retreat);
+                if (hold       != null) picks.Add(hold);
+                break;
+            case EnemyTier.Boss:
+                if (approach   != null) picks.Add(approach);
+                if (atkNormal  != null) picks.Add(atkNormal);
+                if (atkPerilous!= null) picks.Add(atkPerilous);
+                if (feint      != null) picks.Add(feint);
+                if (retreat    != null) picks.Add(retreat);
+                if (hold       != null) picks.Add(hold);
+                break;
+        }
+
+        actionsProp.arraySize = picks.Count;
+        for (int i = 0; i < picks.Count; i++)
+            actionsProp.GetArrayElementAtIndex(i).objectReferenceValue = picks[i];
+        so.ApplyModifiedProperties();
+        changes++;
+    }
+
+    private static void AssignAttackPool(AIEnemy enemy, EnemyTier tier, ref int changes)
+    {
+        if (enemy == null) return;
+        var so = new SerializedObject(enemy);
+        var pool = so.FindProperty("attackPool");
+        if (pool == null) return;
+        if (pool.arraySize > 0) return;
+
+        var slash  = AssetDatabase.LoadAssetAtPath<AttackDataSO>($"{ATTACK_DATA_FOLDER}/Atk_Slash.asset");
+        var sweep  = AssetDatabase.LoadAssetAtPath<AttackDataSO>($"{ATTACK_DATA_FOLDER}/Atk_Sweep.asset");
+        var thrust = AssetDatabase.LoadAssetAtPath<AttackDataSO>($"{ATTACK_DATA_FOLDER}/Atk_Thrust.asset");
+        var crash  = AssetDatabase.LoadAssetAtPath<AttackDataSO>($"{ATTACK_DATA_FOLDER}/Atk_Crash.asset");
+
+        var picks = new List<AttackDataSO>();
+        switch (tier)
+        {
+            case EnemyTier.Grunt:
+                if (slash != null) picks.Add(slash);
+                break;
+            case EnemyTier.Elite:
+                if (slash != null) picks.Add(slash);
+                if (sweep != null) picks.Add(sweep);
+                break;
+            case EnemyTier.Boss:
+                if (slash != null) picks.Add(slash);
+                if (sweep != null) picks.Add(sweep);
+                if (thrust != null) picks.Add(thrust);
+                if (crash != null) picks.Add(crash);
+                break;
+        }
+
+        pool.arraySize = picks.Count;
+        for (int i = 0; i < picks.Count; i++)
+            pool.GetArrayElementAtIndex(i).objectReferenceValue = picks[i];
+        so.ApplyModifiedProperties();
+        changes++;
+    }
+
+    private static (EnemyAction approach, EnemyAction retreat, EnemyAction atkNormal,
+                    EnemyAction atkPerilous, EnemyAction feint, EnemyAction hold) LoadEnemyActions()
+    {
+        EnemyAction Load(string fileName) =>
+            AssetDatabase.LoadAssetAtPath<EnemyAction>($"{AI_ACTIONS_FOLDER}/{fileName}.asset");
+        return (Load("Action_Approach"), Load("Action_Retreat"), Load("Action_AttackNormal"),
+                Load("Action_AttackPerilous"), Load("Action_Feint"), Load("Action_HoldGround"));
+    }
+
+    [MenuItem("Tools/Sekiro Combat/Create Default Enemy Actions")]
+    public static int CreateDefaultEnemyActions()
+    {
+        if (!AssetDatabase.IsValidFolder(AI_ACTIONS_FOLDER))
+        {
+            if (!AssetDatabase.IsValidFolder("Assets/Data")) AssetDatabase.CreateFolder("Assets", "Data");
+            AssetDatabase.CreateFolder("Assets/Data", "AI");
+        }
+
+        int changes = 0;
+        changes += CreateActionAsset<EnemyAction_Approach>("Action_Approach");
+        changes += CreateActionAsset<EnemyAction_Retreat>("Action_Retreat");
+        changes += CreateActionAsset<EnemyAction_AttackNormal>("Action_AttackNormal");
+        changes += CreateActionAsset<EnemyAction_AttackPerilous>("Action_AttackPerilous");
+        changes += CreateActionAsset<EnemyAction_Feint>("Action_Feint");
+        changes += CreateActionAsset<EnemyAction_HoldGround>("Action_HoldGround");
+        return changes;
+    }
+
+    private static int CreateActionAsset<T>(string fileName) where T : EnemyAction
+    {
+        var path = $"{AI_ACTIONS_FOLDER}/{fileName}.asset";
+        if (AssetDatabase.LoadAssetAtPath<T>(path) != null) return 0;
+        var so = ScriptableObject.CreateInstance<T>();
+        AssetDatabase.CreateAsset(so, path);
+        Debug.Log($"<color=#7ee37e>[SekiroAutoWire] ✓ Created</color> {path}");
+        return 1;
     }
 
     [MenuItem("Tools/Sekiro Combat/Add Parry Input Action")]
