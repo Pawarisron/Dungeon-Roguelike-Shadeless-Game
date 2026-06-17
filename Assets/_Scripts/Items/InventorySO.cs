@@ -18,6 +18,11 @@ namespace Inventory.Model
 
         public void Initialize()
         {
+            // ScriptableObject state survives scene loads / play sessions, so drop any
+            // listeners left over from a previous (now destroyed) UI before rebuilding.
+            // Otherwise InformAboutChange() notifies dead UI -> MissingReferenceException.
+            OnInventoryChanged = null;
+
             inventoryItem = new List<InventoryItem>();
             for (int i = 0; i < Size; i++)
             {
