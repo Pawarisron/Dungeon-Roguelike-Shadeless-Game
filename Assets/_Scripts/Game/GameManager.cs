@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     
     private bool isGamePaused = false;
 
+    public bool IsGamePaused => isGamePaused;
+
 
     private void Awake()
     {
@@ -51,11 +53,15 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Debug.Log("Game Restarted");
-        MainMenu();
-        //Clear singletons
-        Destroy(PlayerManager.Instance.gameObject);
-        Destroy(DungeonManager.Instance.gameObject);
-        Destroy(this.gameObject);
+
+        // Undo the pause applied on death (otherwise the menu loads frozen).
+        Time.timeScale = 1f;
+        isGamePaused = false;
+
+        //Clear singletons (guard against any already being gone)
+        if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
+        if (DungeonManager.Instance != null) Destroy(DungeonManager.Instance.gameObject);
+
         if (Caching.ClearCache())
         {
             Debug.Log("Cache has been cleared successfully!");
@@ -64,6 +70,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Failed to clear the cache.");
         }
+
+        MainMenu();
+        Destroy(this.gameObject);
     }
     public void MainMenu()
     {

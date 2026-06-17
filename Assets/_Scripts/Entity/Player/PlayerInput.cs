@@ -30,6 +30,7 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     [Range(0f, 1f)] [SerializeField] private float guardedDamageMultiplier = 0.4f;
 
     private bool energyDrained = false;
+    private bool isDead = false;
     // [SerializeField]
     //private float attackDelay = 0.5f;
 
@@ -44,6 +45,9 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 
     private void Update()
     {
+        // Dead — stop reading input and re-enabling actions.
+        if (isDead) return;
+
         //simplier ?. is a Not NULL
         OnMovementInput?.Invoke(movement.action.ReadValue<Vector2>().normalized);
         OnPointerInput?.Invoke(GetPointerInput());
@@ -71,6 +75,14 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
         roll.action.Enable();
         attack.action.Enable();
         if (parry != null && parry.action != null) parry.action.Enable();
+    }
+
+    public void DisableAll()
+    {
+        movement.action.Disable();
+        roll.action.Disable();
+        attack.action.Disable();
+        if (parry != null && parry.action != null) parry.action.Disable();
     }
 
 
@@ -191,6 +203,12 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 
     private void Die()
     {
+        if (isDead) return;          // guard against multiple lethal hits in one frame
+        isDead = true;
+
+        OnMovementInput?.Invoke(Vector2.zero); // kill residual movement
+        DisableAll();                          // no more attacking/rolling/parrying
+
         OnDeath?.Invoke();
     }
 

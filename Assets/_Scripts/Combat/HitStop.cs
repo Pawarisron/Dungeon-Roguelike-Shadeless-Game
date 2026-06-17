@@ -10,6 +10,9 @@ public class HitStop : MonoBehaviour
 
     public static void Trigger(float duration, float scaleDuringStop = 0.05f)
     {
+        // Don't fight a hard pause (e.g. the Game Over screen).
+        if (GameManager.Instance != null && GameManager.Instance.IsGamePaused) return;
+
         EnsureInstance();
         if (instance.running != null) instance.StopCoroutine(instance.running);
         instance.running = instance.StartCoroutine(instance.StopCo(duration, scaleDuringStop));
@@ -28,7 +31,9 @@ public class HitStop : MonoBehaviour
         Time.timeScale = scale;
         // Use unscaled time so the freeze actually ends.
         yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1f;
+        // If the game got hard-paused mid-freeze (death/menu), stay frozen.
+        bool hardPaused = GameManager.Instance != null && GameManager.Instance.IsGamePaused;
+        Time.timeScale = hardPaused ? 0f : 1f;
         running = null;
     }
 }

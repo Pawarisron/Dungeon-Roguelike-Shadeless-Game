@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Destroy(playerInstance.gameObject);
-        playerInstance= null;
+        if (playerInstance != null) Destroy(playerInstance.gameObject);
+        playerInstance = null;
     }
 }

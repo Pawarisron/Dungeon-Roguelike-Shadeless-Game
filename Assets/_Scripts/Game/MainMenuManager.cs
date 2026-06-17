@@ -11,6 +11,9 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
+        // Safety net: make sure time is running when we land on the menu
+        // (death/pause leaves timeScale at 0).
+        Time.timeScale = 1f;
         Reset();
     }
 
