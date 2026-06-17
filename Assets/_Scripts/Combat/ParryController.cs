@@ -12,7 +12,7 @@ public class ParryController : MonoBehaviour
 
     [Header("Visuals (optional)")]
     [SerializeField] private GameObject parryStanceVfx;
-    [SerializeField] private GameObject parrySparkVfx;
+    [SerializeField] private ParticleSystem parrySparkVfx;
 
     public UnityEvent OnParryTriggered;
     public UnityEvent OnParrySuccess;
@@ -38,7 +38,7 @@ public class ParryController : MonoBehaviour
     {
         Debug.Log("Parry Success");
         OnParrySuccess?.Invoke();
-        if (parrySparkVfx != null) Instantiate(parrySparkVfx, contactPoint, Quaternion.identity);
+        if (parrySparkVfx != null) parrySparkVfx.Play();
         windowEndTime = -1f;
         cooldownEndTime = -1f;
     }

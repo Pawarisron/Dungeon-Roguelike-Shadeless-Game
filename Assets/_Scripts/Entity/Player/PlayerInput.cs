@@ -30,8 +30,8 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     //[Tooltip("HP damage multiplier when guarded but not parried (0=null, 1=full).")]
     //[Range(0f, 1f)] [SerializeField] private float guardedDamageMultiplier = 0.4f;
 
-    [Tooltip("Seconds that movement + attack stay locked when you parry.")]
     [SerializeField] private float parryLockTime = 0.2f;
+    [Tooltip("Seconds that movement + attack stay locked when you parry.")]
 
     private bool energyDrained = false;
     private bool isDead = false;

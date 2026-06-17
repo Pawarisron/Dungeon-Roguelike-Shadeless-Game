@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4946,8 +4946,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.5631094, g: 0.3254717, b: 1, a: 1}
-  m_Intensity: 0
-  m_Range: 4
+  m_Intensity: 2.4492068
+  m_Range: 4.873813
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5198,7 +5198,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.35
+      scalar: 0.3
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -9944,7 +9944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2708598584241629779
 Transform:
   m_ObjectHideFlags: 0
@@ -14847,7 +14847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2708598584738834257
 Transform:
   m_ObjectHideFlags: 0
@@ -14946,7 +14946,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.45
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
