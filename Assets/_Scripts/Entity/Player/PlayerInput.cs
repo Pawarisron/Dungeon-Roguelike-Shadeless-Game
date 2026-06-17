@@ -30,6 +30,9 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     //[Tooltip("HP damage multiplier when guarded but not parried (0=null, 1=full).")]
     //[Range(0f, 1f)] [SerializeField] private float guardedDamageMultiplier = 0.4f;
 
+    [Tooltip("Seconds that movement + attack stay locked when you parry.")]
+    [SerializeField] private float parryLockTime = 0.2f;
+
     private bool energyDrained = false;
     private bool isDead = false;
     private bool inventoryOpen = false;
@@ -59,13 +62,18 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
             // Bag is open: can still walk/run, but no attacking/rolling/parrying.
             movement.action.Enable();
         }
-        else if (!isWaitingForAnimation && !energyDrained)
+        else if (isWaitingForAnimation)
         {
-            EnableAll();
+            // Mid attack/parry: fully locked — no walking, no attacking, no rolling.
+        }
+        else if (energyDrained)
+        {
+            // Out of stamina: can still walk, but attack/roll stay disabled.
+            movement.action.Enable();
         }
         else
         {
-            movement.action.Enable();
+            EnableAll();
         }
 
     }
@@ -131,6 +139,14 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     {
         if (parryController != null) parryController.TriggerParry();
         OnParryPressed?.Invoke();
+
+        // While parrying: lock walking, attacking and rolling for a short beat.
+        movement.action.Disable();
+        attack.action.Disable();
+        roll.action.Disable();
+        isWaitingForAnimation = true;
+        CancelInvoke(nameof(FinishWaiting));
+        Invoke(nameof(FinishWaiting), parryLockTime);
     }
 
     // IParriable — called by the attacker (Agent.ResolveHit).
@@ -184,8 +200,10 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 
     private void PerformAttack(InputAction.CallbackContext context)
     {
+        // While attacking: no walking, no rolling, no parrying.
         movement.action.Disable();
         roll.action.Disable();
+        if (parry != null && parry.action != null) parry.action.Disable();
         WaitForAnimaiotn();
         OnAttack?.Invoke();
     }
