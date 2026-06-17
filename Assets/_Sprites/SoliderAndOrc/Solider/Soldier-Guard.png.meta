@@ -125,12 +125,12 @@ TextureImporter:
       name: Soldier-guard_0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 41
         y: 40
         width: 19
         height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.42105263, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: Soldier-guard_1
       rect:
         serializedVersion: 2
-        x: 140
+        x: 141
         y: 40
         width: 19
         height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.42105263, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -169,12 +169,12 @@ TextureImporter:
       name: Soldier-guard_2
       rect:
         serializedVersion: 2
-        x: 240
+        x: 241
         y: 40
         width: 20
         height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -191,12 +191,12 @@ TextureImporter:
       name: Soldier-guard_3
       rect:
         serializedVersion: 2
-        x: 340
+        x: 341
         y: 40
         width: 20
         height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
