@@ -312,6 +312,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1000000000000000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a7b1d96c8f4f2a9b0c1d2e3f4a5b6c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  homeScene: 2
+  x: 20
+  y: 20
+  width: 140
+  height: 46
+  label: Home
 --- !u!1 &2662924266500722976
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +543,7 @@ GameObject:
   - component: {fileID: 3835045351699733580}
   - component: {fileID: 7184131892929689266}
   - component: {fileID: 6749402975055911817}
+  - component: {fileID: 1000000000000000003}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
