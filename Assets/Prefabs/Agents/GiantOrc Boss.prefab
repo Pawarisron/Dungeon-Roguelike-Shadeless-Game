@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5808272282514931053}
   - component: {fileID: 4405718469022046944}
   - component: {fileID: 8069196142026925156}
+  - component: {fileID: 1000000000000000002}
   m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
@@ -25,6 +26,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1000000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152219034746599017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e23633128cae1489366bdbeafd688e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  droppedItemPrefab: {fileID: 0}
+  lootList: []
+  coinDropChance: 100
+  minCoinAmount: 50
+  maxCoinAmount: 120
 --- !u!4 &1597038257975197886
 Transform:
   m_ObjectHideFlags: 0

@@ -409,6 +409,9 @@ MonoBehaviour:
   - dropQuantity: 2
     dropChance: 80
     item: {fileID: 11400000, guid: ce2866b5108a60b4aacbdb9574df67c2, type: 2}
+  coinDropChance: 90
+  minCoinAmount: 5
+  maxCoinAmount: 12
 --- !u!1 &1308489508906189652
 GameObject:
   m_ObjectHideFlags: 0

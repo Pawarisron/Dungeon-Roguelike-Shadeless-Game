@@ -154,8 +154,13 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; 
         GetComponent<Collider2D>().enabled = false;
 
-        // drop items
-        GetComponent<DropPile>()?.InstantiateLoot(transform.position);
+        // drop items + coins
+        DropPile dropPile = GetComponent<DropPile>();
+        if (dropPile != null)
+        {
+            dropPile.InstantiateLoot(transform.position);
+            dropPile.DropCoins();
+        }
         // distroy children
         Transform[] children = this.GetComponentsInChildren<Transform>();
         if (children.Length > 0) 
