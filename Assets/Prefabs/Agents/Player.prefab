@@ -312,6 +312,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1000000000000000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a7b1d96c8f4f2a9b0c1d2e3f4a5b6c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  homeScene: 2
+  x: 20
+  y: 20
+  width: 200
+  height: 64
+  label: Home
 --- !u!1 &2662924266500722976
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +543,7 @@ GameObject:
   - component: {fileID: 3835045351699733580}
   - component: {fileID: 7184131892929689266}
   - component: {fileID: 6749402975055911817}
+  - component: {fileID: 1000000000000000003}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -541,7 +560,7 @@ Transform:
   m_GameObject: {fileID: 3231584409073162129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.64, y: 1.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -821,6 +840,8 @@ MonoBehaviour:
   postureManager: {fileID: 5672097193850432669}
   mikiriDetector: {fileID: 6909869356431983604}
   dodgeController: {fileID: 90332340591339499}
+  guardedPostureDamage: 12
+  guardedDamageMultiplier: 0.4
   OnMovementInput:
     m_PersistentCalls:
       m_Calls:
@@ -969,18 +990,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 208213495420843650}
-        m_TargetAssemblyTypeName: Agent, Assembly-CSharp
-        m_MethodName: Parried
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1206,7 +1215,7 @@ MonoBehaviour:
   parryWindow: 0.6
   cooldownAfterFail: 0.35
   parryStanceVfx: {fileID: 0}
-  parrySparkVfx: {fileID: 2708598583397607911, guid: db1552a92dd10db4991aba84f462801a, type: 3}
+  parrySparkVfx: {fileID: 0}
   OnParryTriggered:
     m_PersistentCalls:
       m_Calls: []
