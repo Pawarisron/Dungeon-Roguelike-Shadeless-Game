@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 589527216488328839}
   - component: {fileID: 3321410466748817516}
   - component: {fileID: 3808333432148109598}
-  - component: {fileID: 7679676592327568124}
   m_Layer: 5
   m_Name: InGameMenu
   m_TagString: Untagged
@@ -313,28 +312,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!95 &7679676592327568124
-Animator:
-  serializedVersion: 7
+--- !u!114 &1000000000000000003
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2307272343998138483}
+  m_GameObject: {fileID: 3231584409073162129}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5228a2a5e02a67b49bf7ab3d2c129daf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a7b1d96c8f4f2a9b0c1d2e3f4a5b6c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  homeScene: 2
+  x: 20
+  y: 20
+  width: 140
+  height: 46
+  label: Home
 --- !u!1 &2662924266500722976
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +543,7 @@ GameObject:
   - component: {fileID: 3835045351699733580}
   - component: {fileID: 7184131892929689266}
   - component: {fileID: 6749402975055911817}
+  - component: {fileID: 1000000000000000003}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -564,7 +560,7 @@ Transform:
   m_GameObject: {fileID: 3231584409073162129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.64, y: 1.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -844,6 +840,8 @@ MonoBehaviour:
   postureManager: {fileID: 5672097193850432669}
   mikiriDetector: {fileID: 6909869356431983604}
   dodgeController: {fileID: 90332340591339499}
+  guardedPostureDamage: 12
+  guardedDamageMultiplier: 0.4
   OnMovementInput:
     m_PersistentCalls:
       m_Calls:
@@ -992,18 +990,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 208213495420843650}
-        m_TargetAssemblyTypeName: Agent, Assembly-CSharp
-        m_MethodName: Parried
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -28,10 +28,19 @@ namespace Inventory
         private bool isNearTable;
         private Collision2D table;
 
+        private PlayerInput playerInput;
+
         private void Start()
         {
+            playerInput = GetComponentInParent<PlayerInput>();
+            if (playerInput == null) playerInput = FindFirstObjectByType<PlayerInput>();
+
             PrepareUI();
             PrepareInventoryData();
+
+            // Force a known-closed state so the very first Tab opens it (was
+            // taking two presses because the panel could start active).
+            inventoryUI.Hide();
         }
 
         private void OnDestroy()
@@ -185,10 +194,13 @@ namespace Inventory
                             item.Value.item.ItemImage,
                             item.Value.quantity);
                     }
+                    // suspend combat input while the bag is open (movement stays live)
+                    if (playerInput != null) playerInput.OnInventoryOpened();
                 }
                 else
                 {
                     inventoryUI.Hide();
+                    if (playerInput != null) playerInput.OnInventoryClosed();
                 }
             }
         }
