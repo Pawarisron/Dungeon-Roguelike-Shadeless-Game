@@ -153,6 +153,11 @@ public class Agent : MonoBehaviour
         agentAnimations.PlayHurtAnimaiton();
     }
 
+    public void Parried()
+    {
+        agentAnimations.PlayGuardAnimation();
+    }
+
     public void Died()
     {
         // playanimation

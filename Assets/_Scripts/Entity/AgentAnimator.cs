@@ -48,6 +48,10 @@ public class AgentAnimations : MonoBehaviour
     {
         animator.SetBool("Died", true);
     }
+    public void PlayGuardAnimation()
+    {
+        animator.SetTrigger("Guard");
+    }
 
     public void AnimationHandler()
     {

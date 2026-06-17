@@ -25,9 +25,10 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     [SerializeField] private MikiriDetector mikiriDetector;
     [SerializeField] private DodgeController dodgeController;
     [Tooltip("Posture damage taken when blocking without a perfect parry.")]
-    [SerializeField] private float guardedPostureDamage = 12f;
-    [Tooltip("HP damage multiplier when guarded but not parried (0=null, 1=full).")]
-    [Range(0f, 1f)] [SerializeField] private float guardedDamageMultiplier = 0.4f;
+
+    //[SerializeField] private float guardedPostureDamage = 12f;
+    //[Tooltip("HP damage multiplier when guarded but not parried (0=null, 1=full).")]
+    //[Range(0f, 1f)] [SerializeField] private float guardedDamageMultiplier = 0.4f;
 
     private bool energyDrained = false;
     private bool isDead = false;
