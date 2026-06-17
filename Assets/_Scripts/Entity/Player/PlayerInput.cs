@@ -31,6 +31,7 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 
     private bool energyDrained = false;
     private bool isDead = false;
+    private bool inventoryOpen = false;
     // [SerializeField]
     //private float attackDelay = 0.5f;
 
@@ -51,7 +52,13 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
         //simplier ?. is a Not NULL
         OnMovementInput?.Invoke(movement.action.ReadValue<Vector2>().normalized);
         OnPointerInput?.Invoke(GetPointerInput());
-        if (!isWaitingForAnimation && !energyDrained)
+
+        if (inventoryOpen)
+        {
+            // Bag is open: can still walk/run, but no attacking/rolling/parrying.
+            movement.action.Enable();
+        }
+        else if (!isWaitingForAnimation && !energyDrained)
         {
             EnableAll();
         }
@@ -83,6 +90,21 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
         roll.action.Disable();
         attack.action.Disable();
         if (parry != null && parry.action != null) parry.action.Disable();
+    }
+
+    // Called by the inventory UI when it opens/closes. Movement stays live,
+    // combat actions are suspended while the bag is open.
+    public void OnInventoryOpened()
+    {
+        inventoryOpen = true;
+        attack.action.Disable();
+        roll.action.Disable();
+        if (parry != null && parry.action != null) parry.action.Disable();
+    }
+
+    public void OnInventoryClosed()
+    {
+        inventoryOpen = false;
     }
 
 
