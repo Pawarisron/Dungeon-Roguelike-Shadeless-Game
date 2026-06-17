@@ -36,11 +36,14 @@ namespace Inventory
             if (playerInput == null) playerInput = FindFirstObjectByType<PlayerInput>();
 
             PrepareUI();
-            PrepareInventoryData();
 
-            // Force a known-closed state so the very first Tab opens it (was
-            // taking two presses because the panel could start active).
+            // Force a known-closed state BEFORE populating, so the very first
+            // Tab opens it (was taking two presses because the panel could
+            // start active). Done before PrepareInventoryData so it still
+            // applies even if data prep hits an issue.
             inventoryUI.Hide();
+
+            PrepareInventoryData();
         }
 
         private void OnDestroy()
