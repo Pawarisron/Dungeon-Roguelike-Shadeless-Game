@@ -34,6 +34,14 @@ namespace Inventory
             PrepareInventoryData();
         }
 
+        private void OnDestroy()
+        {
+            // Stop listening so the persistent InventorySO doesn't keep calling
+            // into this UI after the scene (and its Images) are destroyed.
+            if (inventoryData != null)
+                inventoryData.OnInventoryChanged -= ChangeInventoryUI;
+        }
+
         private void PrepareInventoryData()
         {
             inventoryData.Initialize();
