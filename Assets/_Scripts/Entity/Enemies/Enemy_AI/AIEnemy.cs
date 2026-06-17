@@ -217,7 +217,7 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
             sequenceIndex++;
             return pick;
         }
-        return attackPool[Random.Range(0, attackPool.Count)];
+        return attackPool[UnityEngine.Random.Range(0, attackPool.Count)];
     }
 
     private void BroadcastForMikiri(AttackDataSO attack)
@@ -259,7 +259,7 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
         var matches = new List<AttackDataSO>();
         foreach (var a in attackPool) if (a != null && a.type == type) matches.Add(a);
         if (matches.Count == 0) return null;
-        return matches[Random.Range(0, matches.Count)];
+        return matches[UnityEngine.Random.Range(0, matches.Count)];
     }
 
     public AttackDataSO PickAttackPerilous()
@@ -268,7 +268,7 @@ public class AIEnemy : MonoBehaviour, IDamageAble, IHealth
         var matches = new List<AttackDataSO>();
         foreach (var a in attackPool) if (a != null && a.IsPerilous) matches.Add(a);
         if (matches.Count == 0) return null;
-        return matches[Random.Range(0, matches.Count)];
+        return matches[UnityEngine.Random.Range(0, matches.Count)];
     }
 
     public void SetAttackPool(List<AttackDataSO> pool)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
@@ -9,12 +10,15 @@ public class HealthManager : MonoBehaviour
     public float healthAmount = 100f;
     public bool isDeath;
     public Canvas DeadScene;
+    
+    public UnityEvent OnHit;
 
     public void TakeDamage(int amoutOfDamage)
     {
+        //Debug.Log("Hit");
         healthAmount -= amoutOfDamage;
         healthBar.fillAmount = healthAmount / maxHealth;
-
+        OnHit?.Invoke();
         if (healthAmount <= 0)
         {
             isDeath = true;

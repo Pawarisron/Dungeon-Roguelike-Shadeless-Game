@@ -502,7 +502,6 @@ GameObject:
   - component: {fileID: 376549118616358198}
   - component: {fileID: 5479027986886700899}
   - component: {fileID: 222798139855110163}
-  - component: {fileID: 5932613730988163031}
   - component: {fileID: 2148975183078857851}
   - component: {fileID: 5737106224483853390}
   - component: {fileID: 208213495420843650}
@@ -515,6 +514,17 @@ GameObject:
   - component: {fileID: 360373506507099965}
   - component: {fileID: 6270957231189794359}
   - component: {fileID: 6138011437096460990}
+  - component: {fileID: 5672097193850432669}
+  - component: {fileID: 2539496001863241517}
+  - component: {fileID: 6909869356431983604}
+  - component: {fileID: 90332340591339499}
+  - component: {fileID: 8790127273067892998}
+  - component: {fileID: 5733023358534303291}
+  - component: {fileID: 4172050026562996286}
+  - component: {fileID: 4260033701626043050}
+  - component: {fileID: 3835045351699733580}
+  - component: {fileID: 7184131892929689266}
+  - component: {fileID: 6749402975055911817}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -538,6 +548,7 @@ Transform:
   - {fileID: 1464840646094985795}
   - {fileID: 3739037509097342983}
   - {fileID: 15171724923510273}
+  - {fileID: 6128771486722072548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5479027986886700899
@@ -622,43 +633,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &5932613730988163031
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231584409073162129}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.06, y: 0.15}
-  m_Size: {x: 1, y: 0.32}
-  m_Direction: 1
 --- !u!70 &2148975183078857851
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -735,6 +709,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf35e8df4803f646a7d9de071b65586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHitLanded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8790127273067892998}
+        m_TargetAssemblyTypeName: ComboCounter, Assembly-CSharp
+        m_MethodName: RegisterHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6749402975055911817}
+        m_TargetAssemblyTypeName: SimpleCameraShake, Assembly-CSharp
+        m_MethodName: ShakeLight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnAttackParried:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathblowDealt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6749402975055911817}
+        m_TargetAssemblyTypeName: SimpleCameraShake, Assembly-CSharp
+        m_MethodName: ShakeHeavy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnAttackWhiffed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4172050026562996286}
+        m_TargetAssemblyTypeName: PlayerActionTracker, Assembly-CSharp
+        m_MethodName: OnAttackWhiff
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   energyOnAttack: 25
   attackPoint: {fileID: 15171724923510273}
   attackRadious: 0.7
@@ -744,6 +778,12 @@ MonoBehaviour:
   attackDamage: 50
   showAttackGizmos: 0
   deathSprite: {fileID: 0}
+  postureDamageOnHit: 18
+  parryRetaliationPosture: 35
+  deathblowDamage: 9999
+  hitStopOnHit: 0.04
+  hitStopOnParry: 0.1
+  hitStopOnDeathblow: 0.2
 --- !u!114 &1584787474389202346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +817,12 @@ MonoBehaviour:
   healthManager: {fileID: 2981650360369018322}
   energyAttack: 0
   coinManager: {fileID: 360373506507099965}
+  parryController: {fileID: 2539496001863241517}
+  postureManager: {fileID: 5672097193850432669}
+  mikiriDetector: {fileID: 6909869356431983604}
+  dodgeController: {fileID: 90332340591339499}
+  guardedPostureDamage: 12
+  guardedDamageMultiplier: 0.4
   OnMovementInput:
     m_PersistentCalls:
       m_Calls:
@@ -822,6 +868,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4172050026562996286}
+        m_TargetAssemblyTypeName: PlayerActionTracker, Assembly-CSharp
+        m_MethodName: OnRoll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBeingAttacked:
     m_PersistentCalls:
       m_Calls:
@@ -832,6 +890,30 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4172050026562996286}
+        m_TargetAssemblyTypeName: PlayerActionTracker, Assembly-CSharp
+        m_MethodName: OnBeingAttacked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8790127273067892998}
+        m_TargetAssemblyTypeName: ComboCounter, Assembly-CSharp
+        m_MethodName: ResetCombo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -867,10 +949,95 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4172050026562996286}
+        m_TargetAssemblyTypeName: PlayerActionTracker, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnParryPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4172050026562996286}
+        m_TargetAssemblyTypeName: PlayerActionTracker, Assembly-CSharp
+        m_MethodName: OnParryPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnParrySuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4172050026562996286}
+        m_TargetAssemblyTypeName: PlayerActionTracker, Assembly-CSharp
+        m_MethodName: OnParrySuccess
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6749402975055911817}
+        m_TargetAssemblyTypeName: SimpleCameraShake, Assembly-CSharp
+        m_MethodName: ShakeMedium
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnMikiriSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6749402975055911817}
+        m_TargetAssemblyTypeName: SimpleCameraShake, Assembly-CSharp
+        m_MethodName: ShakeMedium
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDodgeSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6749402975055911817}
+        m_TargetAssemblyTypeName: SimpleCameraShake, Assembly-CSharp
+        m_MethodName: ShakeLight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   movement: {fileID: -4944502678784020558, guid: a57983e173105c04586bd0d083f05699, type: 3}
   attack: {fileID: -5551314297677729151, guid: a57983e173105c04586bd0d083f05699, type: 3}
   pointerPosition: {fileID: 3409855438700824752, guid: a57983e173105c04586bd0d083f05699, type: 3}
   roll: {fileID: -2849228479628448420, guid: a57983e173105c04586bd0d083f05699, type: 3}
+  parry: {fileID: -8515749646470286973, guid: a57983e173105c04586bd0d083f05699, type: 3}
 --- !u!95 &7212696312659166616
 Animator:
   serializedVersion: 7
@@ -942,6 +1109,9 @@ MonoBehaviour:
   healthAmount: 100
   isDeath: 0
   DeadScene: {fileID: 5598613874900699756}
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &360373506507099965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,9 +1141,9 @@ MonoBehaviour:
   healthBar: {fileID: 7724126072362497963}
   maxEnergy: 100
   energyAmount: 100
-  energyPerSec: 6
+  energyPerSec: 15
   energyGrowthRate: 1.2
-  delayOfResetEnergy: 3
+  delayOfResetEnergy: 2
 --- !u!114 &6138011437096460990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,6 +1157,322 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadScene: {fileID: 5598613874900699756}
+--- !u!114 &5672097193850432669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743b48fa3c78e0749a9f785e514aae4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPosture: 100
+  current: 0
+  regenPerSec: 25
+  regenDelayAfterHit: 1
+  staggerDuration: 2
+  postureBar: {fileID: 0}
+  OnPostureBroken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStaggerEnd:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2539496001863241517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8febe06f62ac284c9e7bf62df24af83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parryWindow: 0.6
+  cooldownAfterFail: 0.35
+  parryStanceVfx: {fileID: 0}
+  parrySparkVfx: {fileID: 0}
+  OnParryTriggered:
+    m_PersistentCalls:
+      m_Calls: []
+  OnParrySuccess:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6909869356431983604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed3eb92c4bc75b45b5ab006752470ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mikiriPostureDamage: 60
+  OnMikiriSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5733023358534303291}
+        m_TargetAssemblyTypeName: MikiriArrowIndicator, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnIncomingThrust:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5733023358534303291}
+        m_TargetAssemblyTypeName: MikiriArrowIndicator, Assembly-CSharp
+        m_MethodName: ShowFor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &90332340591339499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe15bf3856d73c74c83be35e08fa6d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodgeDuration: 0.5
+  cooldown: 0.15
+--- !u!114 &8790127273067892998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6b8c08ae2372f40bbff0d9324d8feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decaySeconds: 2.5
+  maxCombo: 99
+  multiplierStep: 0.1
+  maxMultiplier: 2.5
+  comboText: {fileID: 0}
+  multiplierText: {fileID: 0}
+  OnComboChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnComboBroken:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5733023358534303291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776928041e8d17c4da5f49272cde4abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 0}
+  offset: {x: 0, y: 0.6, z: 0}
+  autoHideAfter: 0.6
+--- !u!114 &4172050026562996286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbaf15f9669c65f45bb7b3a956833c85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastAttackTime: -10
+  lastWhiffTime: -10
+  lastRollTime: -10
+  lastParryPressTime: -10
+  lastParrySuccessTime: -10
+  lastBeingAttackedTime: -10
+  totalAttacks: 0
+  totalWhiffs: 0
+  totalParries: 0
+  totalParrySuccesses: 0
+  totalRolls: 0
+--- !u!114 &4260033701626043050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5eb2d945818dac448004e3535998cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracker: {fileID: 0}
+--- !u!82 &3835045351699733580
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7184131892929689266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d947fe1e9c7a4f64b82e7f3800ed37c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 3835045351699733580}
+  parrySpark: {fileID: 0}
+  guardThud: {fileID: 0}
+  dodgeSwoosh: {fileID: 0}
+  mikiriShing: {fileID: 0}
+  cleanHit: {fileID: 0}
+  deathblowImpact: {fileID: 0}
+  postureBreak: {fileID: 0}
+  perilousHum: {fileID: 0}
+  volume: 1
+  pitchJitter: {x: 0.95, y: 1.05}
+--- !u!114 &6749402975055911817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c5c891c5efe0f46b36493ae24f9c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightForce: 0.1
+  mediumForce: 0.22
+  heavyForce: 0.45
+  lightDuration: 0.12
+  mediumDuration: 0.18
+  heavyDuration: 0.3
 --- !u!1 &3400593539035365572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2555,75 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7262525622515281216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6128771486722072548}
+  - component: {fileID: 6106379958206467451}
+  m_Layer: 7
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6128771486722072548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262525622515281216}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 376549118616358198}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &6106379958206467451
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262525622515281216}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.06, y: 0.15}
+  m_Size: {x: 1, y: 0.32}
+  m_Direction: 1
 --- !u!1 &8609429939376477601
 GameObject:
   m_ObjectHideFlags: 0

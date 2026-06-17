@@ -27,7 +27,7 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "508f7a3d-12ac-4527-9ae4-ea935ecfbb8c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,7 +36,7 @@
                     "name": "Roll",
                     "type": "Button",
                     "id": "90c34c5c-c263-4098-ba92-b725c874abbc",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -45,7 +45,16 @@
                     "name": "OpenInventory",
                     "type": "Button",
                     "id": "82b059a8-ad23-462b-8270-6be43592a8b7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Parry",
+                    "type": "Button",
+                    "id": "b93aa621-1788-4cb4-9639-831f1484efc5",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -150,6 +159,28 @@
                     "action": "OpenInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d04f6d0-5457-4143-afb6-4ffbb31a9ff8",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5db17848-150c-48cc-b690-70d15d2231e7",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -161,7 +192,7 @@
                     "name": "New action",
                     "type": "Button",
                     "id": "b2632097-ca98-42de-be04-e95fd88cf3bf",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

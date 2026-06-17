@@ -190,6 +190,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf35e8df4803f646a7d9de071b65586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHitLanded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackParried:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathblowDealt:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackWhiffed:
+    m_PersistentCalls:
+      m_Calls: []
+  energyOnAttack: 35
   attackPoint: {fileID: 3526685122505776017}
   attackRadious: 0.6
   targetLayer:
@@ -198,6 +211,12 @@ MonoBehaviour:
   attackDamage: 10
   showAttackGizmos: 1
   deathSprite: {fileID: 944428569, guid: f03568f5a4937584d8550e85bd5e99aa, type: 3}
+  postureDamageOnHit: 18
+  parryRetaliationPosture: 35
+  deathblowDamage: 9999
+  hitStopOnHit: 0.04
+  hitStopOnParry: 0.1
+  hitStopOnDeathblow: 0.2
 --- !u!114 &6353847694698912978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +276,10 @@ MonoBehaviour:
   - {fileID: 4047281072632980745}
   - {fileID: 1270074279688665113}
   movementDirectionSolver: {fileID: 2481383133870995203}
+  attackPool: []
+  telegraph: {fileID: 0}
+  pickStrategy: 0
+  utilityBrain: {fileID: 0}
   OnBeingAttacked:
     m_PersistentCalls:
       m_Calls:
@@ -650,6 +673,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2099580793992193081}
+  - component: {fileID: 3740361559986740989}
+  - component: {fileID: 2530763427349364753}
+  - component: {fileID: 5284200540390150468}
+  - component: {fileID: 277161178155970156}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Untagged
@@ -673,6 +700,86 @@ Transform:
   - {fileID: 1597038257975197886}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3740361559986740989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5813762728333709792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743b48fa3c78e0749a9f785e514aae4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPosture: 50
+  current: 0
+  regenPerSec: 25
+  regenDelayAfterHit: 1
+  staggerDuration: 2
+  postureBar: {fileID: 0}
+  OnPostureBroken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStaggerEnd:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2530763427349364753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5813762728333709792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da3f293d2215ef41927fdc25d45d790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+--- !u!114 &5284200540390150468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5813762728333709792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c953ac9ba8964544a1502c6091f2238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  perilousIndicator: {fileID: 0}
+  pulses: 3
+--- !u!114 &277161178155970156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5813762728333709792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e73fe6149899634c8bee625bc80b489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 7eb8a62eacf8cb6498fecd3d8add3e84, type: 2}
+  - {fileID: 11400000, guid: d277166088a479d43a5db424035382d2, type: 2}
+  - {fileID: 11400000, guid: bc9da66a1aebb8048a4ea058e18cfde7, type: 2}
+  - {fileID: 11400000, guid: b25f9ef338a87df47a73fcf7c3c18190, type: 2}
+  decisionTickInterval: 0.08
+  postActionDelay: 0.2
+  enemy: {fileID: 0}
+  agent: {fileID: 0}
+  posture: {fileID: 0}
+  telegraph: {fileID: 0}
+  bossPhases: {fileID: 0}
+  alliesScanRadius: 6
+  allyLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7853319682588453530
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,6 +25,7 @@ public class ParryController : MonoBehaviour
 
     public void TriggerParry()
     {
+        Debug.Log("Trigger Parry");
         if (IsOnCooldown) return;
         windowEndTime = Time.time + parryWindow;
         cooldownEndTime = windowEndTime + cooldownAfterFail;
@@ -34,6 +36,7 @@ public class ParryController : MonoBehaviour
 
     public void NotifySuccess(Vector3 contactPoint)
     {
+        Debug.Log("Parry Success");
         OnParrySuccess?.Invoke();
         if (parrySparkVfx != null) Instantiate(parrySparkVfx, contactPoint, Quaternion.identity);
         windowEndTime = -1f;

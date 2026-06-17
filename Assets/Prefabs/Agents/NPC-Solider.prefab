@@ -89,13 +89,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2384381107628573314}
+  - component: {fileID: 8450719904583446210}
+  - component: {fileID: 8865952888523249067}
+  - component: {fileID: 7000084782319787037}
+  - component: {fileID: 6624202137302891784}
   m_Layer: 0
   m_Name: NPC-Solider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2384381107628573314
 Transform:
   m_ObjectHideFlags: 0
@@ -112,6 +116,86 @@ Transform:
   - {fileID: 2058281035368215600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8450719904583446210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747596277376959021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743b48fa3c78e0749a9f785e514aae4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPosture: 50
+  current: 0
+  regenPerSec: 25
+  regenDelayAfterHit: 1
+  staggerDuration: 2
+  postureBar: {fileID: 0}
+  OnPostureBroken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStaggerEnd:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8865952888523249067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747596277376959021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da3f293d2215ef41927fdc25d45d790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+--- !u!114 &7000084782319787037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747596277376959021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c953ac9ba8964544a1502c6091f2238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  perilousIndicator: {fileID: 0}
+  pulses: 3
+--- !u!114 &6624202137302891784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747596277376959021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e73fe6149899634c8bee625bc80b489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 7eb8a62eacf8cb6498fecd3d8add3e84, type: 2}
+  - {fileID: 11400000, guid: d277166088a479d43a5db424035382d2, type: 2}
+  - {fileID: 11400000, guid: bc9da66a1aebb8048a4ea058e18cfde7, type: 2}
+  - {fileID: 11400000, guid: b25f9ef338a87df47a73fcf7c3c18190, type: 2}
+  decisionTickInterval: 0.08
+  postActionDelay: 0.2
+  enemy: {fileID: 0}
+  agent: {fileID: 0}
+  posture: {fileID: 0}
+  telegraph: {fileID: 0}
+  bossPhases: {fileID: 0}
+  alliesScanRadius: 6
+  allyLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3030660728878630872
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +458,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf35e8df4803f646a7d9de071b65586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHitLanded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackParried:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathblowDealt:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackWhiffed:
+    m_PersistentCalls:
+      m_Calls: []
+  energyOnAttack: 35
   attackPoint: {fileID: 0}
   attackRadious: 0
   targetLayer:
@@ -382,6 +479,12 @@ MonoBehaviour:
   attackDamage: 0
   showAttackGizmos: 0
   deathSprite: {fileID: 0}
+  postureDamageOnHit: 18
+  parryRetaliationPosture: 35
+  deathblowDamage: 9999
+  hitStopOnHit: 0.04
+  hitStopOnParry: 0.1
+  hitStopOnDeathblow: 0.2
 --- !u!114 &6761682679546852424
 MonoBehaviour:
   m_ObjectHideFlags: 0

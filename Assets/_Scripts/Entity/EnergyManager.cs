@@ -2,7 +2,6 @@ using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class EnergyManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -12,67 +11,79 @@ public class EnergyManager : MonoBehaviour
     public float energyPerSec = 6f;
     public float energyGrowthRate = 1.1f;
     public int delayOfResetEnergy = 3;
-
     private float timer = 0f;
     private bool isDrained = false;
     private float originEnergyPerSec = 6f;
-    private bool triggerTakeEnergy = false;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
         originEnergyPerSec = energyPerSec;
+        playerInput = GetComponent<PlayerInput>();
     }
+
     public void TakeEnergy(int amountOfDamage)
     {
-        triggerTakeEnergy = true;
         energyAmount -= amountOfDamage;
-        healthBar.fillAmount = energyAmount / maxEnergy;
+        UpdateHealthBar();
+
+        // Getting hit always resets the growth-rate ramp.
+        energyPerSec = originEnergyPerSec;
 
         //Drained here
         if (energyAmount <= 0 && !isDrained)
         {
-            StartCoroutine(ResetEnergyAfterDelay());
             energyAmount = 0;
-            
+            UpdateHealthBar();
+            StartCoroutine(ResetEnergyAfterDelay());
         }
-        triggerTakeEnergy=false;
     }
 
     public void Energy(float healingAmount)
     {
-        if (isDrained) return;  
-
+        if (isDrained) return;
         energyAmount += healingAmount;
         energyAmount = Mathf.Clamp(energyAmount, 0, maxEnergy);
-        healthBar.fillAmount = energyAmount / maxEnergy;
+        UpdateHealthBar();
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        if (isDrained) return;
 
-        if (timer >= 1 && !isDrained)
+        timer += Time.deltaTime;
+        if (timer >= 1f)
         {
             Energy(energyPerSec);
             energyPerSec *= energyGrowthRate;
-            timer = 0;
+            timer = 0f;
         }
-        //stop growthRate
-        if(energyAmount == maxEnergy || triggerTakeEnergy || isDrained)
+
+        // Stop the growth ramp once energy is full again.
+        if (energyAmount >= maxEnergy)
         {
             energyPerSec = originEnergyPerSec;
+        }
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.fillAmount = energyAmount / maxEnergy;
         }
     }
 
     private IEnumerator ResetEnergyAfterDelay()
     {
         isDrained = true;
-        GetComponent<PlayerInput>().DraindedEnergyEffect();
+        if (playerInput != null) playerInput.DraindedEnergyEffect();
         Debug.Log("drained");
+
         yield return new WaitForSeconds(delayOfResetEnergy);
-        GetComponent<PlayerInput>().UnDraindedEnergyEffect();
+
+        if (playerInput != null) playerInput.UnDraindedEnergyEffect();
         Debug.Log("undrainded");
-        isDrained = false;                  
+        isDrained = false;
     }
 }
-

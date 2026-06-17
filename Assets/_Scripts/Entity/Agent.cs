@@ -127,21 +127,21 @@ public class Agent : MonoBehaviour
             return;
         }
 
-        // 2. Deathblow — staggered targets die in one swing.
-        var targetPosture = hitTarget.GetComponent<PostureManager>();
-        if (targetPosture != null && targetPosture.IsStaggered)
-        {
-            var dmgable = hitTarget.GetComponent<IDamageAble>();
-            if (dmgable != null) dmgable.TakeDamage(deathblowDamage);
-            HitStop.Trigger(hitStopOnDeathblow);
-            OnDeathblowDealt?.Invoke();
-            return;
-        }
+        //// 2. Deathblow — staggered targets die in one swing.
+        //var targetPosture = hitTarget.GetComponent<PostureManager>();
+        //if (targetPosture != null && targetPosture.IsStaggered)
+        //{
+        //    var dmgable = hitTarget.GetComponent<IDamageAble>();
+        //    if (dmgable != null) dmgable.TakeDamage(deathblowDamage);
+        //    HitStop.Trigger(hitStopOnDeathblow);
+        //    OnDeathblowDealt?.Invoke();
+        //    return;
+        //}
 
         // 3. Clean hit — HP damage AND posture pressure.
         var damageable = hitTarget.GetComponent<IDamageAble>();
         if (damageable != null) damageable.TakeDamage(hpDmg);
-        if (targetPosture != null) targetPosture.TakePostureDamage(postureDmg);
+        //if (targetPosture != null) targetPosture.TakePostureDamage(postureDmg);
         HitStop.Trigger(hitStopOnHit);
         OnHitLanded?.Invoke();
     }

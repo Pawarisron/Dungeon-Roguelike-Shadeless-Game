@@ -133,16 +133,16 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
             return true;
         }
 
-        // 5. Partial guard during parry cooldown.
-        if (parryController != null && parryController.IsOnCooldown)
-        {
-            int reduced = Mathf.Max(1, Mathf.RoundToInt(incomingDamage * guardedDamageMultiplier));
-            healthManager.TakeDamage(reduced);
-            if (postureManager != null) postureManager.TakePostureDamage(guardedPostureDamage);
-            OnBeingAttacked?.Invoke();
-            if (healthManager.isDeath) Die();
-            return true;
-        }
+        //// 5. Partial guard during parry cooldown.
+        //if (parryController != null && parryController.IsOnCooldown)
+        //{
+        //    int reduced = Mathf.Max(1, Mathf.RoundToInt(incomingDamage * guardedDamageMultiplier));
+        //    healthManager.TakeDamage(reduced);
+        //    if (postureManager != null) postureManager.TakePostureDamage(guardedPostureDamage);
+        //    OnBeingAttacked?.Invoke();
+        //    if (healthManager.isDeath) Die();
+        //    return true;
+        //}
 
         return false;  // open hit — Agent will call TakeDamage with full damage
     }
