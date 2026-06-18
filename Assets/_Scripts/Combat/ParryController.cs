@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 // Holds the parry timing window. Fired by PlayerInput when the parry button is pressed.
 // Other scripts read IsInParryWindow.
@@ -17,6 +18,9 @@ public class ParryController : MonoBehaviour
     public UnityEvent OnParryTriggered;
     public UnityEvent OnParrySuccess;
 
+    //Fast lane event
+    public event Action ParrySucceeded;
+
     private float windowEndTime = -1f;
     private float cooldownEndTime = -1f;
 
@@ -29,6 +33,7 @@ public class ParryController : MonoBehaviour
         if (IsOnCooldown) return;
         windowEndTime = Time.time + parryWindow;
         cooldownEndTime = windowEndTime + cooldownAfterFail;
+        ParrySucceeded?.Invoke();
         OnParryTriggered?.Invoke();
         if (parryStanceVfx != null) parryStanceVfx.SetActive(true);
         Invoke(nameof(HideStance), parryWindow);
@@ -38,7 +43,10 @@ public class ParryController : MonoBehaviour
     {
         Debug.Log("Parry Success");
         OnParrySuccess?.Invoke();
-        if (parrySparkVfx != null) parrySparkVfx.Play();
+
+        if (parrySparkVfx != null) 
+            parrySparkVfx.Play();
+
         windowEndTime = -1f;
         cooldownEndTime = -1f;
     }

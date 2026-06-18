@@ -160,8 +160,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.29, y: 0.2}
-  m_Size: {x: 0.80000013, y: 0.39380738}
+  m_Offset: {x: -0.2820006, y: 0.28599036}
+  m_Size: {x: 0.78400266, y: 0.56578916}
   m_Direction: 1
 --- !u!114 &444376232369343898
 MonoBehaviour:
@@ -268,7 +268,7 @@ MonoBehaviour:
     detectionDelay: 0.05
     aiUpdateDelay: 0.06
     attackDelay: 1
-    attackDistance: 0.9
+    attackDistance: 1.2
   steeringBehaviours:
   - {fileID: 1439705188868997864}
   - {fileID: 2767507355356366355}
@@ -659,14 +659,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb8a715ec8b2d84aa9451ee83fe6b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDectectionRange: 5
+  targetDectectionRange: 4
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 192
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  showGizmos: 0
+  showGizmos: 1
 --- !u!1 &5813762728333709792
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,5 +863,5 @@ MonoBehaviour:
   detectionRadious: 2
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
-  showGizmos: 0
+    m_Bits: 576
+  showGizmos: 1

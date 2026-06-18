@@ -8,6 +8,12 @@ public class Treasure : MonoBehaviour
     {
         GetComponent<DropPile>()?.InstantiateLoot(transform.position);
         GetComponent<SpriteRenderer>().sprite = openedSprite;
-        GetComponent<Interacable>().enabled = false;
+
+        var interactable = GetComponent<Interacable>();
+        if (interactable != null)
+        {
+            interactable.interactText.enabled = false;
+            interactable.enabled = false;
+        }
     }
 }

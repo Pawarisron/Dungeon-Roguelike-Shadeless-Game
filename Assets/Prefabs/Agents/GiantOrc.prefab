@@ -26,23 +26,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1000000000000000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152219034746599017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e23633128cae1489366bdbeafd688e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  droppedItemPrefab: {fileID: 0}
-  lootList: []
-  coinDropChance: 100
-  minCoinAmount: 15
-  maxCoinAmount: 30
 --- !u!4 &1597038257975197886
 Transform:
   m_ObjectHideFlags: 0
@@ -394,6 +377,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1000000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152219034746599017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e23633128cae1489366bdbeafd688e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 0}
+  lootList: []
+  coinDropChance: 100
+  minCoinAmount: 15
+  maxCoinAmount: 30
 --- !u!1 &1308489508906189652
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,14 +641,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb8a715ec8b2d84aa9451ee83fe6b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDectectionRange: 10
+  targetDectectionRange: 6
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 192
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  showGizmos: 0
+  showGizmos: 1
 --- !u!1 &5813762728333709792
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,5 +846,5 @@ MonoBehaviour:
   detectionRadious: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   showGizmos: 1

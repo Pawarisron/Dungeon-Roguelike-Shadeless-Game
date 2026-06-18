@@ -10,12 +10,12 @@ public class Interacable : MonoBehaviour
     public UnityEvent interactAction;
     public Canvas interactText;
 
-
+    //TODO: move interact logic to player for performance
     private void Awake()
     {
         interactText.enabled = false;
     }
-    void Update()
+    private void Update()
     {
         if (isInrange)
         {
@@ -45,5 +45,13 @@ public class Interacable : MonoBehaviour
             if (interactText != null)
                 interactText.enabled = false;
         }
+    }
+
+    private void OnDisable()
+    {
+        isInrange = false;
+
+        if (interactText != null)
+            interactText.gameObject.SetActive(false);
     }
 }

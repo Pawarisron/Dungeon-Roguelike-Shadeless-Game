@@ -33,6 +33,10 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     [SerializeField] private float parryLockTime = 0.2f;
     [Tooltip("Seconds that movement + attack stay locked when you parry.")]
 
+    [SerializeField] private float hurtLockTime = 0.15f;
+    [Tooltip("Seconds that movement + attack stay locked when you hurt.")]
+    
+
     private bool energyDrained = false;
     private bool isDead = false;
     private bool inventoryOpen = false;
@@ -47,7 +51,6 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
     private bool isWaitingForAnimation = false;
     // public int MaxHealth => maxEnegy;
     // public int CurrentHealth => currentHealth;
-
     private void Update()
     {
         // Dead — stop reading input and re-enabling actions.
@@ -124,6 +127,10 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
         roll.action.performed += PerformRoll;
         if (parry != null && parry.action != null)
             parry.action.performed += PerformParry;
+        if (parryController != null)
+        {
+            parryController.ParrySucceeded += HandleParrySuccess;
+        }
     }
 
 
@@ -133,6 +140,10 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
         roll.action.performed -= PerformRoll;
         if (parry != null && parry.action != null)
             parry.action.performed -= PerformParry;
+        if (parryController != null)
+        {
+            parryController.ParrySucceeded -= HandleParrySuccess;
+        }
     }
 
     private void PerformParry(InputAction.CallbackContext context)
@@ -197,7 +208,13 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 
         return false;  // open hit — Agent will call TakeDamage with full damage
     }
-
+    private void HandleParrySuccess()
+    {
+        Debug.Log("reset animation");
+        //reset animation timer when parry success
+        CancelInvoke(nameof(FinishWaiting));
+        FinishWaiting();
+    }
     private void PerformAttack(InputAction.CallbackContext context)
     {
         // While attacking: no walking, no rolling, no parrying.
@@ -225,21 +242,25 @@ public class PlayerInput : MonoBehaviour, IDamageAble, IParriable
 
     public void TakeDamage(int damage)
     {
-        // decrease health
         healthManager.TakeDamage(damage);
 
-        // play hurt animation
+        // lock input while hurt
+        movement.action.Disable();
+        attack.action.Disable();
+        roll.action.Disable();
+        if (parry != null && parry.action != null)
+            parry.action.Disable();
+
+        isWaitingForAnimation = true;
+        CancelInvoke(nameof(FinishWaiting));
+        Invoke(nameof(FinishWaiting), hurtLockTime);
+
         OnBeingAttacked?.Invoke();
-        if (!energyDrained)
-        {
-            EnableAll();
-        }
-        // die
+
         if (healthManager.isDeath)
         {
             Die();
         }
-
     }
 
     private void Die()

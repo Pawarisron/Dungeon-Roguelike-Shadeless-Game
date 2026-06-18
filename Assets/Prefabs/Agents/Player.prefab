@@ -503,11 +503,11 @@ GameObject:
   - component: {fileID: 5479027986886700899}
   - component: {fileID: 222798139855110163}
   - component: {fileID: 2148975183078857851}
+  - component: {fileID: 7212696312659166616}
   - component: {fileID: 5737106224483853390}
   - component: {fileID: 208213495420843650}
   - component: {fileID: 1584787474389202346}
   - component: {fileID: 2936594892679231107}
-  - component: {fileID: 7212696312659166616}
   - component: {fileID: 7970648484406152384}
   - component: {fileID: 9021430363599975981}
   - component: {fileID: 2981650360369018322}
@@ -672,6 +672,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.65625}
   m_Size: {x: 0.61, y: 1.3125}
   m_Direction: 0
+--- !u!95 &7212696312659166616
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231584409073162129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e54589aba3e2644eb0df90067591a18, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5737106224483853390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +845,7 @@ MonoBehaviour:
   postureManager: {fileID: 5672097193850432669}
   mikiriDetector: {fileID: 6909869356431983604}
   dodgeController: {fileID: 90332340591339499}
-  parryLockTime: 0.35
+  parryLockTime: 0.3
   OnMovementInput:
     m_PersistentCalls:
       m_Calls:
@@ -1051,28 +1073,6 @@ MonoBehaviour:
   pointerPosition: {fileID: 3409855438700824752, guid: a57983e173105c04586bd0d083f05699, type: 3}
   roll: {fileID: -2849228479628448420, guid: a57983e173105c04586bd0d083f05699, type: 3}
   parry: {fileID: -8515749646470286973, guid: a57983e173105c04586bd0d083f05699, type: 3}
---- !u!95 &7212696312659166616
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231584409073162129}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e54589aba3e2644eb0df90067591a18, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7970648484406152384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8febe06f62ac284c9e7bf62df24af83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parryWindow: 0.6
+  parryWindow: 0.3
   cooldownAfterFail: 0.35
   parryStanceVfx: {fileID: 0}
   parrySparkVfx: {fileID: 5943024763634682510}
@@ -1215,7 +1215,19 @@ MonoBehaviour:
       m_Calls: []
   OnParrySuccess:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2936594892679231107}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: HandleParrySuccess
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6909869356431983604
 MonoBehaviour:
   m_ObjectHideFlags: 0
