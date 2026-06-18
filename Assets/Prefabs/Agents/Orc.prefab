@@ -861,6 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadious: 2
+  selfCollider: {fileID: 3849758874454766453}
   layerMask:
     serializedVersion: 2
     m_Bits: 576

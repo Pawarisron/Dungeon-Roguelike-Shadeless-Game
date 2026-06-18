@@ -11,6 +11,9 @@ public class ObsticleDetector : Detector
     private float detectionRadious = 2;
 
     [SerializeField]
+    private Collider2D selfCollider;
+
+    [SerializeField]
     private LayerMask layerMask;
 
     [SerializeField]
@@ -20,9 +23,19 @@ public class ObsticleDetector : Detector
 
     public override void Detect(AI_Data aiData)
     {
-        colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadious,layerMask);
-        aiData.obsticles = colliders;
-        // not add wall to the collider list yet
+        colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadious, layerMask);
+
+        List<Collider2D> filtered = new List<Collider2D>();
+
+        foreach (var c in colliders)
+        {
+            if (c == selfCollider)
+                continue;
+
+            filtered.Add(c);
+        }
+
+        aiData.obsticles = filtered.ToArray();
     }
 
     private void OnDrawGizmos()
@@ -38,6 +51,10 @@ public class ObsticleDetector : Detector
             Gizmos.color = Color.red;
             foreach (Collider2D obsticlaCollider in colliders)
             {
+                if (obsticlaCollider == selfCollider)
+                {
+                    continue;
+                }
                 Gizmos.DrawSphere(obsticlaCollider.transform.position, 0.2f);
             }
         }
