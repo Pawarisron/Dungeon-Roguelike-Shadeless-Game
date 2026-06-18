@@ -34,7 +34,7 @@ namespace Inventory.UI
 
         private void Awake()
         {
-            Hide();
+            
             mouseFollower.Toggle(false);
             itemDescriptrion.ResetDescription();
             

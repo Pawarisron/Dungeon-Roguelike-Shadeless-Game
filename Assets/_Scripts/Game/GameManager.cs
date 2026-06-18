@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -61,16 +59,16 @@ public class GameManager : MonoBehaviour
         //Clear singletons (guard against any already being gone)
         if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
         if (DungeonManager.Instance != null) Destroy(DungeonManager.Instance.gameObject);
-
+        #if !UNITY_WEBGL
         if (Caching.ClearCache())
         {
             Debug.Log("Cache has been cleared successfully!");
         }
         else
         {
-            Debug.Log("Failed to clear the cache.");
+            Debug.LogWarning("Failed to clear the cache.");
         }
-
+        #endif
         MainMenu();
         Destroy(this.gameObject);
     }

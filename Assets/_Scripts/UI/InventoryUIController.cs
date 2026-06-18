@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace Inventory
@@ -17,6 +18,9 @@ namespace Inventory
 
         [SerializeField]
         private InventorySO inventoryData;
+
+        [SerializeField]
+        private InputActionReference openInventory;
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
 
@@ -182,29 +186,34 @@ namespace Inventory
             }
             return sb.ToString();
         }
-
-        public void Update()
+        private void SellItem(int itemIndex, int quantity)
         {
-            // TODO: change the inventory menu input to new input system
-            if (Input.GetKeyDown(KeyCode.Tab))
+            // get table 
+            table.gameObject.GetComponent<ItemShopDisplay>().Place(inventoryData.GetItemAt(itemIndex), quantity);
+            DropItem(itemIndex, quantity);
+        }
+
+
+        private void HandleOpenInventory(InputAction.CallbackContext context)
+        {
+            Debug.Log("open inventory");
+            if (inventoryUI.isActiveAndEnabled == false)
             {
-                if (inventoryUI.isActiveAndEnabled == false)
+                Debug.Log("true");
+                inventoryUI.Show();
+                foreach (var item in inventoryData.GetCurrentInventoryState())
                 {
-                    inventoryUI.Show();
-                    foreach (var item in inventoryData.GetCurrentInventoryState())
-                    {
-                        inventoryUI.UpdateData(item.Key,
-                            item.Value.item.ItemImage,
-                            item.Value.quantity);
-                    }
-                    // suspend combat input while the bag is open (movement stays live)
-                    if (playerInput != null) playerInput.OnInventoryOpened();
+                    inventoryUI.UpdateData(item.Key,
+                        item.Value.item.ItemImage,
+                        item.Value.quantity);
                 }
-                else
-                {
-                    inventoryUI.Hide();
-                    if (playerInput != null) playerInput.OnInventoryClosed();
-                }
+                // suspend combat input while the bag is open (movement stays live)
+                if (playerInput != null) playerInput.OnInventoryOpened();
+            }
+            else
+            {
+                inventoryUI.Hide();
+                if (playerInput != null) playerInput.OnInventoryClosed();
             }
         }
 
@@ -231,11 +240,15 @@ namespace Inventory
             }
             
         }
-        private void SellItem(int itemIndex, int quantity)
+
+        private void OnEnable()
         {
-            // get table 
-            table.gameObject.GetComponent<ItemShopDisplay>().Place(inventoryData.GetItemAt(itemIndex), quantity);
-            DropItem(itemIndex, quantity);
+            openInventory.action.performed += HandleOpenInventory; 
+        }
+
+        private void OnDisable()
+        {
+            openInventory.action.performed -= HandleOpenInventory;
         }
 
 
